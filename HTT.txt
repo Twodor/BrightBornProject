@@ -1530,7 +1530,7 @@
     91741 tgaatgccgt accgggagaa ccactgctct cttcagagct gtcaggcacg tatgtttaaa
     91801 tctggagaag ctgtctgctg ccttttgttc agatgtgccc ttcccccaga ggtggaatct
     91861 agagaggcag taggccttgc tgagctgcag tgggctctgc ccagttcgag cttccctgct
-    91921 gctttgttta cactgtgagc atagaaccac ctactctagc ctcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagtg gtggacaccccagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcagcag
+    91921 gctttgttta cactgtgagc atagaaccac ctactctagc ctcagcagtg gtggacaccc
     91981 ctcccccagc caagctcctg catcccaggt cgatttcaga gtgctgcgct agcagtgagc
     92041 aaggccccat gggcgtggga cccgctgagc caggcacagg agagaatctc ctggtctgct
     92101 ggttgtgaag actgtgggaa aagtgcagta tttgggcagg agtgtactgc tccttcaggt

@@ -159,18 +159,136 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
         tp53 = row[12]
         name = row[13]
 
+    if (tp53 == "Not Healthy"):
+        cursor.execute(tp53Query)
+        result = cursor.fetchall()
+        for rows in result:
+            TP53AGT_AGX = rows[1]
+            TP53CGA_TGA = rows[2]
+            TP53CGG_TGG = rows[3]
+            TP53GAA_AAA = rows[4]
+            TP53GAG_AAG = rows[5]
+            TP53GAT_GAX = rows[6]
+            TP53GCC_TGC = rows[7]
+        if(TP53AGT_AGX == patientTP53):
+            print("TP53AGT_AGX")
+        elif(TP53CGA_TGA == patientTP53):
+            print("TP53CGA_TGA")
+        elif (TP53CGG_TGG == patientTP53):
+            print("TP53CGG_TGG")
+        elif (TP53GAA_AAA == patientTP53):
+            print("TP53GAA_AAA")
+        elif (TP53GAG_AAG == patientTP53):
+            print("TP53GAG_AAG")
+        elif (TP53GAT_GAX == patientTP53):
+            print("TP53GAT_GAX")
+        elif (TP53GCC_TGC == patientTP53):
+            print("TP53GCC_TGC")
+
+    if(pah == "Not Healthy"):
+        cursor.execute(pahQuery)
+        result = cursor.fetchall()
+        for rows in result:
+            PAH42AAA_GAA = rows[1]
+            PAHATG_AGG = rows[2]
+            PAHCAG_CAC = rows[3]
+            PAHCGC_GGC = rows[4]
+            PAHGAA_TAA = rows[5]
+            PAHGCC_GAC = rows[6]
+        if(PAH42AAA_GAA == patientPAH):
+            print("PAH42AAA_GAA")
+        elif(PAHATG_AGG == patientPAH):
+            print("PAHATG_AGG")
+        elif (PAHCAG_CAC == patientPAH):
+            print("PAHCAG_CAC")
+        elif (PAHCGC_GGC == patientPAH):
+            print("PAHCGC_GGC")
+        elif (PAHGAA_TAA == patientPAH):
+            print("PAHGAA_TAA")
+        elif (PAHGCC_GAC == patientPAH):
+            print("PAHGCC_GAC")
+
+
+    if(htt == "Not Healthy"):
+        cursor.execute(httQuery)
+        result = cursor.fetchall()
+        for rows in result:
+            htt40 = rows[1]
+            htt65 = rows[2]
+            htt120 = rows[3]
+            httACG_ATG = rows[4]
+            httCCG_CTG = rows[5]
+        if(htt40 == patientHTT):
+            print("htt40")
+        elif(htt65 == patientHTT):
+            print("htt65")
+        elif (htt120 == patientHTT):
+            print("htt120")
+        elif (httACG_ATG == patientHTT):
+            print("httACG_ATG")
+        elif (httCCG_CTG == patientHTT):
+            print("httCCG_CTG")
+
+
+    if(cftr == "Not Healthy"):
+        cursor.execute(cftrQuery)
+        result = cursor.fetchall()
+        for rows in result:
+            cftr188 = rows[1]
+            cftr1456 = rows[2]
+            cftr1526 = rows[3]
+            cftr1567 = rows[4]
+            cftr1717 = rows[5]
+            cftr220 = rows[6]
+            cftr3808 = rows[7]
+            cftr870 = rows[8]
+            cftr3874 = rows[9]
+
+        if(cftr188 == patientCFTR):
+            print("cftr188")
+        elif(cftr1456 == patientCFTR):
+            print("cftr1456")
+        elif (cftr1526 == patientCFTR):
+            print("cftr1526")
+        elif (cftr1567 == patientCFTR):
+            print("cftr1567")
+        elif (cftr1717 == patientCFTR):
+            print("cftr1717")
+        elif (cftr220 == patientCFTR):
+            print("cftr220")
+        elif (cftr3808 == patientCFTR):
+            print("cftr3808")
+        elif (cftr870 == patientCFTR):
+            print("cftr870")
+        elif (cftr3874 == patientCFTR):
+            print("cftr3874")
+
+
     if(oca2 == "Not Healthy"):
         cursor.execute(oca2Query)
         result = cursor.fetchall()
         for rows in result:
-            OCA2AGG_AGT = row[1]
-            OCA2CGG_TGG = row[2]
-            OCA2GGA_AGA = row[3]
-            OCA2GTG_TTG = row[4]
-            OCA2TGG_TAG = row[5]
-            OCA2TTT_TGT = row[6]
-    if(OCA2GGA_AGA == patientOCA):
-        print("Hastalık: OCA2GGA_AGA")
+            OCA2AGG_AGT = rows[0].replace("\n", "")
+            OCA2CGG_TGG = rows[1].replace("\n", "")
+            OCA2GGA_AGA = rows[2]
+            OCA2GTG_TTG = rows[3].replace("\n", "")
+            OCA2TGG_TAG = rows[4].replace("\n", "")
+            OCA2TTT_TGT = rows[5].replace("\n", "")
+
+        if(OCA2GGA_AGA == patientOCA):
+            print("OCA2GGA_AGA")
+        elif(OCA2AGG_AGT == patientOCA):
+            print("OCA2AGG_AGT")
+        elif(OCA2CGG_TGG == patientOCA):
+            print("OCA2CGG_TGG")
+        elif(OCA2GTG_TTG == patientOCA):
+            print("OCA2GTG_TTG")
+        elif(OCA2TGG_TAG == patientOCA):
+            print("OCA2TGG_TAG")
+        elif(OCA2TTT_TGT == patientOCA):
+             print("OCA2TGG_TAG")
+
+
     if(hbb == "Not Healthy"):
         cursor.execute(hbbQuery)
         result = cursor.fetchall()
@@ -181,6 +299,19 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
             HBBATG_ATC = rows[4].replace("\n", "")
             HBBGTG_ATG = rows[5].replace("\n", "")
             # DELTED ASK UGUR # HBBc328G = row[6]
+        if(HBBATG_AAG == patientHBB):
+            print("HBBATG_AAG")
+        elif(HBBATG_ACG == patientHBB):
+            print("HBBATG_ACG")
+        elif (HBBATG_ATA == patientHBB):
+            print("HBBATG_ATA")
+        elif (HBBATG_ATC == patientHBB):
+            print("HBBATG_ATC")
+        elif (HBBGTG_ATG == patientHBB):
+            print("HBBGTG_ATG")
+        else:
+            print("HBB CLEAR!")
+
 
 def take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(patientID):
     selectionQuery = "Select * FROM patients where id = 0"
@@ -241,4 +372,4 @@ def take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(patient
 
     checkMutantGensIfGenIsUnhealthy(patientID)
 
-take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(6)
+take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(1)

@@ -24,7 +24,7 @@
      1381 tcaaaatgtt aattggcata aattatagac tttttttagc agagaacttt gaggaaccta
      1441 aatgccaacc agtctaaaaa tgcagttttc agaagaatga atatttcatg gatagttcta
      1501 aatactaatg aactttaaaa tagcttacta ttgatctgtc aaagtgggtt tttatataat
-     1561 tttcttttta caaatcacct gacacattta atataggtta aaaaatgcta tcaggctggt
+     1561 tttcttttta caaatcacct tacacattta atataggtta aaaaatgcta tcaggctggt
      1621 ttgcaaagaa aatgtattac aaaggctgct aagtgtgtta agagcatact catttctgtt
      1681 ctccaaaata tttcataagg tgctttaaga ataggtatgt ttttaaaagt taagttccta
      1741 ctatttatag gaactgacaa tcacctaaaa taccaatgat tacaaacttc cttctggcct
