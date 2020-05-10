@@ -17,8 +17,6 @@ cursor = connection.cursor()
 class Ui_Dialog(object):
 
     def loginCheck(self):
-
-
         username = self.user_name.text()
         password = self.password.text()
         query = "SELECT * from doctors where username = %s AND password = %s"
@@ -26,6 +24,10 @@ class Ui_Dialog(object):
         cursor.execute(query, (vals))
         result = cursor.fetchall()
         if(len(result) > 0):
+            for row in result:
+                self.ID = row[0]
+                self.name = row[3]
+                self.surname = row[4]
             self.pushButton.clicked.connect(self.openSubmitWindow)
         else:
             print("No User Found")
@@ -39,7 +41,7 @@ class Ui_Dialog(object):
 
     def openSubmitWindow(self):
         self.window=QtWidgets.QMainWindow()
-        self.ui = submitReport.Ui_Dialog()
+        self.ui = submitReport.Ui_Dialog(self.name, self.surname, self.ID)
         self.ui.setupUi(self.window)
         self.window.show()
 
