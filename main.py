@@ -373,4 +373,5 @@ def take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(patient
 
     checkMutantGensIfGenIsUnhealthy(patientID)
 
-take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(1)
+#take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(1)
+
