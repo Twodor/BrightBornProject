@@ -268,6 +268,7 @@ class Ui_Dialog(object):
                 HBBATG_ATC = rows[4].replace("\n", "")
                 HBBGTG_ATG = rows[5].replace("\n", "")
                 # DELTED ASK UGUR # HBBc328G = row[6]
+
             if (HBBATG_AAG == hbb):
                 print("HBBATG_AAG")
             elif (HBBATG_ACG == hbb):
