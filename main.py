@@ -145,6 +145,7 @@ patientOCA = open("OCA2.txt").read().replace(" ", "").translate(remove_digits).r
 patientTP53 = open("TP53.txt").read().replace(" ", "").translate(remove_digits).replace("\n", "")
 patientPAH = open("PAH.txt").read().replace(" ", "").translate(remove_digits).replace("\n", "")
 
+
 def checkMutantGensIfGenIsUnhealthy(patientID):
     selectionQuery = "Select * FROM patients where TC_ID = %s"
     cursor.execute(selectionQuery, (patientID,))
