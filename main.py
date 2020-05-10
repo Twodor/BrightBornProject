@@ -158,7 +158,7 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
         pah = row[10]
         htt = row[11]
         tp53 = row[12]
-        name = row[13]
+
 
     if (tp53 == "Not Healthy"):
         cursor.execute(tp53Query)
@@ -375,7 +375,23 @@ def take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(patient
 
 #take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(1)
 
+query = "INSERT into patients(hbb, cftr, oca2, pah, htt, tp53, name, TC_ID, doctorID) " \
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+hbbMan = "a"
+cftrMan = "b"
+oca2Man = "c"
+pahMan = "d"
+httMan  ="e"
+tp53Man="f"
+manID="g"
+ID = "a"
+name = "qq"
+query2 = "Select * FROM patients order by id desc limit 1"
 
+cursor.execute(query2)
+result = cursor.fetchall()
+for row in result:
+    print(row[13])
 
 
 
