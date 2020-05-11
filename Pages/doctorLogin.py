@@ -1,6 +1,6 @@
 
 from PyQt5 import QtCore, QtWidgets
-from pages import helpPage, submitReport
+from Pages import helpPage, submitReport
 import mysql.connector
 
 connection = mysql.connector.connect(host='localhost',

@@ -543,7 +543,7 @@ else:
         versions = True
 TC_IDWoman = str(TC_IDWoman)
 TC_IDMan = str(TC_IDMan)
-TC_IDCocuk = TC_IDMan + TC_IDWoman
+TC_IDCocuk = TC_IDMan ++ TC_IDWoman
 if(versions == True):
     childQ = """Insert Into patients(hbb, cftr, oca2, pah, htt, tp53,
      reshbb, rescftr, resoca2, respah, reshtt, resp53,

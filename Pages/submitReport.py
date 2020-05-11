@@ -10,7 +10,7 @@ from string import digits
 import mysql.connector
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog
-from pages import basicReport
+from Pages import basicReport
 
 connection = mysql.connector.connect(host='localhost',
                                      database='se315',
@@ -33,9 +33,9 @@ class Ui_Dialog(object):
         self.ID = str(ID)
 
     def pushButtonHandlerMan(self):
-        self.dialogBoxMan()
+        self.getManGeneInfo()
 
-    def dialogBoxMan(self):
+    def getManGeneInfo(self):
         remove_digits = str.maketrans('', '', digits)
         filePath = QFileDialog.getOpenFileName()
         path = filePath[0]
@@ -49,9 +49,9 @@ class Ui_Dialog(object):
         self.oca2Man = a[1913470:2257870]
 
     def pushButtonHandlerWoman(self):
-        self.dialogBoxWoman()
+        self.getWomanGeneInfo()
 
-    def dialogBoxWoman(self):
+    def getWomanGeneInfo(self):
         remove_digits = str.maketrans('', '', digits)
         filePath = QFileDialog.getOpenFileName()
         path = filePath[0]
@@ -357,7 +357,6 @@ class Ui_Dialog(object):
         self.checkMutantGensIfGenIsUnhealthy(self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman, self.httWoman, self.tp53Woman, TC_ID)
         self.cocuk()
 
-
     def xstr(self,s):
         if s is None:
             return " "
@@ -458,7 +457,7 @@ class Ui_Dialog(object):
         if (hbbW == "Not Healthy" and hbbM == "Not Healthy"):
             cocukhbb = "Not Healthy"
             if (hbbDiseaseMAN == hbbDiseaseWOMAN):
-                cocukhbb2Disease = hbbDiseaseWOMAN
+                cocukhbb2DieaseVersion1 = hbbDiseaseWOMAN
             else:
                 cocukhbb2DieaseVersion1 = hbbDiseaseWOMAN + "" + hbbDiseaseMAN
                 versions = True
@@ -471,7 +470,7 @@ class Ui_Dialog(object):
         else:
             cocukoca2 = "Not Healthy"
             if (oca2DiseaseWOMAN == ocaDisease2MAN):
-                cocukoca2Disease = ocaDisease2MAN
+                cocukoca2DieaseVersion1 = ocaDisease2MAN
             else:
                 cocukoca2DieaseVersion1 = oca2DiseaseWOMAN + "" + ocaDisease2MAN
                 versions = True
@@ -482,7 +481,7 @@ class Ui_Dialog(object):
         else:
             cocukcftr = "Not Healthy"
             if (cftrDiseaseMAN == cftrDiseaseWOMAN):
-                cocukcftr2Disease = cftrDiseaseMAN
+                cocukcftr2DieaseVersion1 = cftrDiseaseMAN
             else:
                 cocukcftr2DieaseVersion1 = cftrDiseaseWOMAN + "" + cftrDiseaseMAN
                 versions = True
@@ -492,7 +491,7 @@ class Ui_Dialog(object):
         else:
             cocukpah = "Not Healthy"
             if (pahDiseaseMAN == pahDiseaseWOMAN):
-                cocukpah2Disease = pahDiseaseMAN
+                cocukpah2DieaseVersion1 = pahDiseaseMAN
             else:
                 cocukpah2DieaseVersion1 = pahDiseaseWOMAN + "" + pahDiseaseMAN
                 versions = True
@@ -502,7 +501,7 @@ class Ui_Dialog(object):
         else:
             cocukhtt = "Not Healthy"
             if (httDiseaseMAN == httDiseaseWOMAN):
-                cocukhtt2Disease = httDiseaseMAN
+                cocukhtt2DieaseVersion1 = httDiseaseMAN
             else:
                 cocukhtt2DieaseVersion1 = httDiseaseWOMAN + "" + httDiseaseMAN
                 versions = True
@@ -512,7 +511,7 @@ class Ui_Dialog(object):
         else:
             cocuktp53 = "Not Healthy"
             if (tp53DiseaseMAN == tp53DiseaseWOMAN):
-                cocuktp532Disease = tp53DiseaseWOMAN
+                cocuktp532DieaseVersion1 = tp53DiseaseWOMAN
             else:
                 cocuktp532DieaseVersion1 = tp53DiseaseMAN + "" + tp53DiseaseWOMAN
                 versions = True
@@ -531,9 +530,40 @@ class Ui_Dialog(object):
                       cocukoca2DieaseVersion1, cocukhtt2DieaseVersion1, cocuktp532DieaseVersion1)
             cursor.execute(childQ, values)
             connection.commit()
-        print("Man report ID: ", reportIDMan )
-        print("Woman report ID: ", reportIDWoman)
-        print("Baby reportID: ", reportIDWoman+1)
+            print("Man report ID: ", reportIDMan)
+            print("Woman report ID: ", reportIDWoman)
+            print("Baby reportID: ", reportIDWoman + 1)
+
+        if(versions == False):
+            self.getP0Genes()
+            print(self.hbb0)
+
+            childQ = """Insert Into patients(hbb, cftr, oca2, pah, htt, tp53,
+                         reshbb, rescftr, resoca2, respah, reshtt, resp53,name,
+                          TC_ID,doctorID, hbbDiseases, pahDiseases, cftrDiseases, oca2Diseases, httDiseases, tp53Diseases)
+                         Values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            name = "kid"
+            values = (self.hbb0, self.cftr0, self.oca20, self.pah0, self.htt0, self.tp530,
+                      cocukhbb, cocukcftr, cocukoca2, cocukpah, cocukhtt, cocuktp53, name, TC_IDCocuk, self.ID,
+                      cocukhbb2DieaseVersion1, cocukpah2DieaseVersion1, cocukcftr2DieaseVersion1,
+                      cocukoca2DieaseVersion1, cocukhtt2DieaseVersion1, cocuktp532DieaseVersion1)
+            cursor.execute(childQ, values)
+            connection.commit()
+            print("Man report ID: ", reportIDMan)
+            print("Woman report ID: ", reportIDWoman)
+            print("Baby reportID: ", reportIDWoman + 1)
+
+    def getP0Genes(self):
+        query = "Select * from patients where id = 0"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        for row in result:
+            self.hbb0 = row[1]
+            self.cftr0 = row[2]
+            self.oca20 = row[3]
+            self.pah0 = row[4]
+            self.htt0 = row[5]
+            self.tp530 = row[6]
 
     def browse(self):
         filePath = QFileDialog.getOpenFileName(self, 'Single File',

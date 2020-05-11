@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtWidgets
 
-from pages import patientLogin, helpPage, doctorLogin, information
+from Pages import patientLogin, helpPage, doctorLogin, information
 
 
 class Ui_Dialog(object):

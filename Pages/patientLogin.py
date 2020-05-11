@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtWidgets
 
-from pages import basicReport
+from Pages import basicReport
 
 
 class Ui_Dialog(object):

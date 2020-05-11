@@ -8,7 +8,7 @@
 import mysql.connector
 from PyQt5 import QtCore, QtWidgets
 
-from pages import complexReport
+from Pages import complexReport
 
 connection = mysql.connector.connect(host='localhost',
                                      database='se315',
@@ -32,7 +32,7 @@ class Ui_Dialog(object):
             self.respah = "PAH status: " + row[10] + "\n"
             self.reshtt = "HTT status: " + row[11] + "\n"
             self.resp53 = "P53 status: " + row[12] + "\n"
-            self.name = "NAME status: " + row[13] + "\n"
+
 
             self.hbbDiseases = "HBB Diseases: " + row[17] + "\n"
             self.pahDiseases = "Pah Diseases: " + row[18] + "\n"
@@ -41,10 +41,15 @@ class Ui_Dialog(object):
             self.httDiseases = "HTT Diseases: " + row[21] + "\n"
             self.tp53Diseases = "TP53 Diseases: " + row[22] + "\n"
 
+            self.name = "Full Name: " + row[13] + "\n"
+
+
+
         self.values = self.reshbb + self.rescftr + self.resoca2 + self.respah + self.reshtt + self.resp53
 
         self.diseases = self.hbbDiseases + self.pahDiseases + self.cftrDiseases + self.oca2Diseases + self.httDiseases + self.tp53Diseases
 
+        self.information = self.name
 
     def complexReport(self):
         self.window = QtWidgets.QMainWindow()
@@ -63,24 +68,18 @@ class Ui_Dialog(object):
         self.showHealthStatus.setObjectName("textBrowser_2")
         self.showHealthStatus.setText(self.values)
 
-        '''
-        self.textBrowser_2.setText(self.rescftr)
-        self.textBrowser_2.setText(self.resoca2)
-        self.textBrowser_2.setText(self.respah)
-        self.textBrowser_2.setText(self.reshtt)
-        self.textBrowser_2.setText(self.resp53)
-        '''
 
         self.ShowDiseasesNames = QtWidgets.QTextBrowser(Dialog)
         self.ShowDiseasesNames.setGeometry(QtCore.QRect(310, 110, 211, 151))
         self.ShowDiseasesNames.setObjectName("textBrowser_3")
-
         self.ShowDiseasesNames.setText(self.diseases)
 
 
-        self.textBrowser_4 = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser_4.setGeometry(QtCore.QRect(40, 290, 211, 151))
-        self.textBrowser_4.setObjectName("textBrowser_4")
+        self.generalInformation = QtWidgets.QTextBrowser(Dialog)
+        self.generalInformation.setGeometry(QtCore.QRect(40, 290, 211, 151))
+        self.generalInformation.setObjectName("textBrowser_4")
+        self.generalInformation.setText(self.information)
+
         self.textBrowser_5 = QtWidgets.QTextBrowser(Dialog)
         self.textBrowser_5.setGeometry(QtCore.QRect(310, 290, 211, 151))
         self.textBrowser_5.setObjectName("textBrowser_5")
@@ -101,8 +100,6 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog",
                                       "<html><head/><body><p><span style=\" font-size:18pt; color:#5d5d5d;\">Report ID : "+self.ID+"</span></p></body></html>"))
         self.commandLinkButton.setText(_translate("Dialog", "Detailed Report"))
-        self.label_3.setText(_translate("Dialog",
-                                        "<html><head/><body><p><span style=\" font-size:11pt; font-style:italic; color:#ff0000;\">Some of the</span></p><p><span style=\" font-size:11pt; font-style:italic; color:#ff0000;\">information must</span></p><p><span style=\" font-size:11pt; font-style:italic; color:#ff0000;\">be colored due to</span></p><p><span style=\" font-size:11pt; font-style:italic; color:#ff0000;\">complexity of</span></p><p><span style=\" font-size:11pt; font-style:italic; color:#ff0000;\">understing for the</span></p><p><span style=\" font-size:11pt; font-style:italic; color:#ff0000;\">patients</span></p></body></html>"))
 
 
 if __name__ == "__main__":
