@@ -33,7 +33,18 @@ class Ui_Dialog(object):
             self.reshtt = "HTT status: " + row[11] + "\n"
             self.resp53 = "P53 status: " + row[12] + "\n"
             self.name = "NAME status: " + row[13] + "\n"
+
+            self.hbbDiseases = "HBB Diseases: " + row[17] + "\n"
+            self.pahDiseases = "Pah Diseases: " + row[18] + "\n"
+            self.cftrDiseases = "CFTR Diseases: " + row[19] + "\n"
+            self.oca2Diseases = "OCA2 Diseases: " + row[20] + "\n"
+            self.httDiseases = "HTT Diseases: " + row[21] + "\n"
+            self.tp53Diseases = "TP53 Diseases: " + row[22] + "\n"
+
         self.values = self.reshbb + self.rescftr + self.resoca2 + self.respah + self.reshtt + self.resp53
+
+        self.diseases = self.hbbDiseases + self.pahDiseases + self.cftrDiseases + self.oca2Diseases + self.httDiseases + self.tp53Diseases
+
 
     def complexReport(self):
         self.window = QtWidgets.QMainWindow()
@@ -47,10 +58,10 @@ class Ui_Dialog(object):
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(210, 10, 241, 51))
         self.label.setObjectName("label")
-        self.textBrowser_2 = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser_2.setGeometry(QtCore.QRect(40, 110, 211, 151))
-        self.textBrowser_2.setObjectName("textBrowser_2")
-        self.textBrowser_2.setText(self.values)
+        self.showHealthStatus = QtWidgets.QTextBrowser(Dialog)
+        self.showHealthStatus.setGeometry(QtCore.QRect(40, 110, 211, 151))
+        self.showHealthStatus.setObjectName("textBrowser_2")
+        self.showHealthStatus.setText(self.values)
 
         '''
         self.textBrowser_2.setText(self.rescftr)
@@ -60,9 +71,13 @@ class Ui_Dialog(object):
         self.textBrowser_2.setText(self.resp53)
         '''
 
-        self.textBrowser_3 = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser_3.setGeometry(QtCore.QRect(310, 110, 211, 151))
-        self.textBrowser_3.setObjectName("textBrowser_3")
+        self.ShowDiseasesNames = QtWidgets.QTextBrowser(Dialog)
+        self.ShowDiseasesNames.setGeometry(QtCore.QRect(310, 110, 211, 151))
+        self.ShowDiseasesNames.setObjectName("textBrowser_3")
+
+        self.ShowDiseasesNames.setText(self.diseases)
+
+
         self.textBrowser_4 = QtWidgets.QTextBrowser(Dialog)
         self.textBrowser_4.setGeometry(QtCore.QRect(40, 290, 211, 151))
         self.textBrowser_4.setObjectName("textBrowser_4")
