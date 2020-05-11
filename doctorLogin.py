@@ -1,5 +1,4 @@
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import  submitReport, helpPage
 import mysql.connector
@@ -25,22 +24,21 @@ class Ui_Dialog(object):
         result = cursor.fetchall()
         if(len(result) > 0):
             for row in result:
-                self.ID = row[0]
                 self.name = row[3]
                 self.surname = row[4]
+                self.ID = row[0]
             self.pushButton.clicked.connect(self.openSubmitWindow)
         else:
             print("No User Found")
 
-
     def openHelpPage(self):
-        self.window=QtWidgets.QMainWindow()
+        self.window =QtWidgets.QMainWindow()
         self.ui = helpPage.Ui_Dialog()
         self.ui.setupUi(self.window)
         self.window.show()
 
     def openSubmitWindow(self):
-        self.window=QtWidgets.QMainWindow()
+        self.window =QtWidgets.QMainWindow()
         self.ui = submitReport.Ui_Dialog(self.name, self.surname, self.ID)
         self.ui.setupUi(self.window)
         self.window.show()
@@ -94,7 +92,6 @@ class Ui_Dialog(object):
         self.pushButton.setText(_translate("Dialog", "Login"))
         self.commandLinkButton.setText(_translate("Dialog", "Forgot Password"))
 
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -103,4 +100,3 @@ if __name__ == "__main__":
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
-

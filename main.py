@@ -4,6 +4,7 @@ from string import digits
 import difflib
 from difflib import SequenceMatcher
 import numpy as np
+import itertools
 
 connection = mysql.connector.connect(host='localhost',
                                      database='se315',
@@ -136,7 +137,7 @@ httQuery = "SELECT  * FROM httmutant"
 oca2Query = "SELECT * FROM oca2mutant"
 tp53Query = "SELECT * FROM tp53mutant"
 pahQuery = "SELECT  * FROM  pahmutant"
-
+'''
 remove_digits = str.maketrans('', '', digits)
 patientCFTR = open("CFTR.txt").read().replace(" ", "").translate(remove_digits).replace("\n", "")
 patientHBB = open("HBB.txt").read().replace(" ", "").translate(remove_digits).replace("\n", "")
@@ -144,6 +145,7 @@ patientHTT = open("HTT.txt").read().replace(" ", "").translate(remove_digits).re
 patientOCA = open("OCA2.txt").read().replace(" ", "").translate(remove_digits).replace("\n", "")
 patientTP53 = open("TP53.txt").read().replace(" ", "").translate(remove_digits).replace("\n", "")
 patientPAH = open("PAH.txt").read().replace(" ", "").translate(remove_digits).replace("\n", "")
+'''
 
 
 def checkMutantGensIfGenIsUnhealthy(patientID):
@@ -151,14 +153,13 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
     cursor.execute(selectionQuery, (patientID,))
     results = cursor.fetchall()
 
-    for  row in results:
+    for row in results:
         hbb = row[7]
         cftr = row[8]
         oca2 = row[9]
         pah = row[10]
         htt = row[11]
         tp53 = row[12]
-
 
     if (tp53 == "Not Healthy"):
         cursor.execute(tp53Query)
@@ -171,9 +172,9 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
             TP53GAG_AAG = rows[5]
             TP53GAT_GAX = rows[6]
             TP53GCC_TGC = rows[7]
-        if(TP53AGT_AGX == patientTP53):
+        if (TP53AGT_AGX == patientTP53):
             print("TP53AGT_AGX")
-        elif(TP53CGA_TGA == patientTP53):
+        elif (TP53CGA_TGA == patientTP53):
             print("TP53CGA_TGA")
         elif (TP53CGG_TGG == patientTP53):
             print("TP53CGG_TGG")
@@ -186,7 +187,7 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
         elif (TP53GCC_TGC == patientTP53):
             print("TP53GCC_TGC")
 
-    if(pah == "Not Healthy"):
+    if (pah == "Not Healthy"):
         cursor.execute(pahQuery)
         result = cursor.fetchall()
         for rows in result:
@@ -196,9 +197,9 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
             PAHCGC_GGC = rows[4]
             PAHGAA_TAA = rows[5]
             PAHGCC_GAC = rows[6]
-        if(PAH42AAA_GAA == patientPAH):
+        if (PAH42AAA_GAA == patientPAH):
             print("PAH42AAA_GAA")
-        elif(PAHATG_AGG == patientPAH):
+        elif (PAHATG_AGG == patientPAH):
             print("PAHATG_AGG")
         elif (PAHCAG_CAC == patientPAH):
             print("PAHCAG_CAC")
@@ -209,8 +210,7 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
         elif (PAHGCC_GAC == patientPAH):
             print("PAHGCC_GAC")
 
-
-    if(htt == "Not Healthy"):
+    if (htt == "Not Healthy"):
         cursor.execute(httQuery)
         result = cursor.fetchall()
         for rows in result:
@@ -219,9 +219,9 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
             htt120 = rows[3]
             httACG_ATG = rows[4]
             httCCG_CTG = rows[5]
-        if(htt40 == patientHTT):
+        if (htt40 == patientHTT):
             print("htt40")
-        elif(htt65 == patientHTT):
+        elif (htt65 == patientHTT):
             print("htt65")
         elif (htt120 == patientHTT):
             print("htt120")
@@ -230,8 +230,7 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
         elif (httCCG_CTG == patientHTT):
             print("httCCG_CTG")
 
-
-    if(cftr == "Not Healthy"):
+    if (cftr == "Not Healthy"):
         cursor.execute(cftrQuery)
         result = cursor.fetchall()
         for rows in result:
@@ -245,9 +244,9 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
             cftr870 = rows[8]
             cftr3874 = rows[9]
 
-        if(cftr188 == patientCFTR):
+        if (cftr188 == patientCFTR):
             print("cftr188")
-        elif(cftr1456 == patientCFTR):
+        elif (cftr1456 == patientCFTR):
             print("cftr1456")
         elif (cftr1526 == patientCFTR):
             print("cftr1526")
@@ -264,8 +263,7 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
         elif (cftr3874 == patientCFTR):
             print("cftr3874")
 
-
-    if(oca2 == "Not Healthy"):
+    if (oca2 == "Not Healthy"):
         cursor.execute(oca2Query)
         result = cursor.fetchall()
         for rows in result:
@@ -276,21 +274,20 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
             OCA2TGG_TAG = rows[4].replace("\n", "")
             OCA2TTT_TGT = rows[5].replace("\n", "")
 
-        if(OCA2GGA_AGA == patientOCA):
+        if (OCA2GGA_AGA == patientOCA):
             print("OCA2GGA_AGA")
-        elif(OCA2AGG_AGT == patientOCA):
+        elif (OCA2AGG_AGT == patientOCA):
             print("OCA2AGG_AGT")
-        elif(OCA2CGG_TGG == patientOCA):
+        elif (OCA2CGG_TGG == patientOCA):
             print("OCA2CGG_TGG")
-        elif(OCA2GTG_TTG == patientOCA):
+        elif (OCA2GTG_TTG == patientOCA):
             print("OCA2GTG_TTG")
-        elif(OCA2TGG_TAG == patientOCA):
+        elif (OCA2TGG_TAG == patientOCA):
             print("OCA2TGG_TAG")
-        elif(OCA2TTT_TGT == patientOCA):
-             print("OCA2TGG_TAG")
+        elif (OCA2TTT_TGT == patientOCA):
+            print("OCA2TGG_TAG")
 
-
-    if(hbb == "Not Healthy"):
+    if (hbb == "Not Healthy"):
         cursor.execute(hbbQuery)
         result = cursor.fetchall()
         for rows in result:
@@ -300,9 +297,9 @@ def checkMutantGensIfGenIsUnhealthy(patientID):
             HBBATG_ATC = rows[4].replace("\n", "")
             HBBGTG_ATG = rows[5].replace("\n", "")
             # DELTED ASK UGUR # HBBc328G = row[6]
-        if(HBBATG_AAG == patientHBB):
+        if (HBBATG_AAG == patientHBB):
             print("HBBATG_AAG")
-        elif(HBBATG_ACG == patientHBB):
+        elif (HBBATG_ACG == patientHBB):
             print("HBBATG_ACG")
         elif (HBBATG_ATA == patientHBB):
             print("HBBATG_ATA")
@@ -330,9 +327,7 @@ def take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(patient
         HEALTHYhtt = row[5]
         HEALTHYtp53 = row[6]
 
-
     patientValues = (patientHBB, patientCFTR, patientOCA, patientPAH, patientHTT, patientTP53, patientName, patientID)
-
 
     cursor.execute(insertionQuery, patientValues)
     connection.commit()
@@ -373,26 +368,72 @@ def take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(patient
 
     checkMutantGensIfGenIsUnhealthy(patientID)
 
-#take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(1)
 
-query = "INSERT into patients(hbb, cftr, oca2, pah, htt, tp53, name, TC_ID, doctorID) " \
-                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-hbbMan = "a"
-cftrMan = "b"
-oca2Man = "c"
-pahMan = "d"
-httMan  ="e"
-tp53Man="f"
-manID="g"
-ID = "a"
-name = "qq"
-query2 = "Select * FROM patients order by id desc limit 1"
-
-cursor.execute(query2)
-result = cursor.fetchall()
-for row in result:
-    print(row[13])
+# take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(1)
 
 
+'''
+
+q = "Select * FROM patients where TC_ID = %s"
+q2 = "Select * FROM patients where TC_ID = %s"
+qv = 551
+q2v = 552
+
+cursor.execute(q, (qv,))
+res1 = cursor.fetchall()
 
 
+cursor.execute(q2, (q2v,))
+res2 = cursor.fetchall()
+
+for row in res1:
+    hbbM = row[7]
+    cftrM = row[8]
+    oca2M = row[9]
+    pahM = row[10]
+    httM = row[11]
+    tp53M = row[12]
+
+for row in res2:
+    hbbW = row[7]
+    cftrW = row[8]
+    oca2W = row[9]
+    pahW = row[10]
+    httW = row[11]
+    tp53W = row[12]
+
+if(hbbW == "Not Healthy" and hbbM == "Not Healthy"):
+    çocukhbb = "Not Healthy"
+else:
+    çocukhbb = "Healthy"
+
+if(oca2M == "Not Healthy" and oca2W == "Not Healthy"):
+    çocukoca2 = "Not Healthy"
+else:
+    çocukoca2 = "Healthy"
+
+if(cftrM == "healthy" or cftrW =="healthy" ):
+    çocukcftr = "Healthy"
+else:
+    çocukcftr = "Not Healthy"
+
+if(pahW == "healthy" or pahM =="healthy" ):
+    çocukpah = "Healthy"
+else:
+    çocukpah = "Not Healthy"
+
+if(httW == "healthy" or httM =="healthy" ):
+    çocukhtt = "Healthy"
+else:
+    çocukhtt = "Not Healthy"
+
+if(tp53W == "healthy" or tp53M =="healthy" ):
+    çocuktp53 = "Healthy"
+else:
+    çocuktp53 = "Not Healthy"
+'''
+
+qq = "UPDATE patients SET tp53Diseases = %s WHERE TC_ID = %s"
+val = (self.TP53Reason, TC_ID)
+cursor.execute(qq, val)
+connection.commit()

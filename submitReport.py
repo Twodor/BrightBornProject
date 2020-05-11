@@ -132,6 +132,7 @@ class Ui_Dialog(object):
             reshtt = row[11]
             restp53 = row[12]
 
+
         if (restp53 == "Not Healthy"):
             cursor.execute(tp53Query)
             result = cursor.fetchall()
@@ -144,19 +145,23 @@ class Ui_Dialog(object):
                 TP53GAT_GAX = rows[6]
                 TP53GCC_TGC = rows[7]
             if (TP53AGT_AGX == tp53):
-                print("TP53AGT_AGX")
+                self.TP53Reason = "TP53AGT_AGX"
             elif (TP53CGA_TGA == tp53):
-                print("TP53CGA_TGA")
+                self.TP53Reason = "TP53CGA_TGA"
             elif (TP53CGG_TGG == tp53):
-                print("TP53CGG_TGG")
+                self.TP53Reason = "TP53CGG_TGG"
             elif (TP53GAA_AAA == tp53):
-                print("TP53GAA_AAA")
+                self.TP53Reason = "TP53GAA_AAA"
             elif (TP53GAG_AAG == tp53):
-                print("TP53GAG_AAG")
+                self.TP53Reason = "TP53GAG_AAG"
             elif (TP53GAT_GAX == tp53):
-                print("TP53GAT_GAX")
+                self.TP53Reason = "TP53GAT_GAX"
             elif (TP53GCC_TGC == tp53):
-                print("TP53GCC_TGC")
+                self.TP53Reason = "TP53GCC_TGC"
+            qq = "UPDATE patients SET tp53Diseases = %s WHERE TC_ID = %s"
+            val = (self.TP53Reason, TC_ID)
+            cursor.execute(qq, val)
+            connection.commit()
 
         if (respah == "Not Healthy"):
             cursor.execute(pahQuery)
@@ -169,17 +174,21 @@ class Ui_Dialog(object):
                 PAHGAA_TAA = rows[5]
                 PAHGCC_GAC = rows[6]
             if (PAH42AAA_GAA == pah):
-                print("PAH42AAA_GAA")
+                self.PAHReason = "PAH42AAA_GAA"
             elif (PAHATG_AGG == pah):
-                print("PAHATG_AGG")
+                self.PAHReason = "PAHATG_AGG"
             elif (PAHCAG_CAC == pah):
-                print("PAHCAG_CAC")
+                self.PAHReason = "PAHCAG_CAC"
             elif (PAHCGC_GGC == pah):
-                print("PAHCGC_GGC")
+                self.PAHReason = "PAHCGC_GGC"
             elif (PAHGAA_TAA == pah):
-                print("PAHGAA_TAA")
+                self.PAHReason = "PAHGAA_TAA"
             elif (PAHGCC_GAC == pah):
-                print("PAHGCC_GAC")
+                self.PAHReason = "PAHGCC_GAC"
+            qq = "UPDATE patients SET pahDiseases = %s WHERE TC_ID = %s"
+            val = (self.PAHReason, TC_ID)
+            cursor.execute(qq, val)
+            connection.commit()
 
         if (reshtt == "Not Healthy"):
             cursor.execute(httQuery)
@@ -191,15 +200,19 @@ class Ui_Dialog(object):
                 httACG_ATG = rows[4]
                 httCCG_CTG = rows[5]
             if (htt40 == htt):
-                print("htt40")
+                self.HTTReason = "htt40"
             elif (htt65 == htt):
-                print("htt65")
+                self.HTTReason = "htt65"
             elif (htt120 == htt):
-                print("htt120")
+                self.HTTReason = "htt120"
             elif (httACG_ATG == htt):
-                print("httACG_ATG")
+                self.HTTReason = "httACG_ATG"
             elif (httCCG_CTG == htt):
-                print("httCCG_CTG")
+                self.HTTReason = "httCCG_CTG"
+            qq = "UPDATE patients SET httDiseases = %s WHERE TC_ID = %s"
+            val = (self.HTTReason, TC_ID)
+            cursor.execute(qq, val)
+            connection.commit()
 
         if (rescftr == "Not Healthy"):
             cursor.execute(cftrQuery)
@@ -216,23 +229,27 @@ class Ui_Dialog(object):
                 cftr3874 = rows[9]
 
             if (cftr188 == cftr):
-                print("cftr188")
+                self.CFTRReason = "cftr188"
             elif (cftr1456 == cftr):
-                print("cftr1456")
+                self.CFTRReason = "cftr1456"
             elif (cftr1526 == cftr):
-                print("cftr1526")
+                self.CFTRReason = "cftr1526"
             elif (cftr1567 == cftr):
-                print("cftr1567")
+                self.CFTRReason = "cftr1567"
             elif (cftr1717 == cftr):
-                print("cftr1717")
+                self.CFTRReason = "cftr1717"
             elif (cftr220 == cftr):
-                print("cftr220")
+                self.CFTRReason = "cftr220"
             elif (cftr3808 == cftr):
-                print("cftr3808")
+                self.CFTRReason = "cftr3808"
             elif (cftr870 == cftr):
-                print("cftr870")
+                self.CFTRReason = "cftr870"
             elif (cftr3874 == cftr):
-                print("cftr3874")
+                self.CFTRReason = "cftr3874"
+            qq = "UPDATE patients SET cftrDiseases = %s WHERE TC_ID = %s"
+            val = (self.CFTRReason, TC_ID)
+            cursor.execute(qq, val)
+            connection.commit()
 
         if (resoca2 == "Not Healthy"):
             cursor.execute(oca2Query)
@@ -246,17 +263,21 @@ class Ui_Dialog(object):
                 OCA2TTT_TGT = rows[5].replace("\n", "")
 
             if (OCA2GGA_AGA == oca):
-                print("OCA2GGA_AGA")
+                self.OCA2Reason= "OCA2GGA_AGA"
             elif (OCA2AGG_AGT == oca):
-                print("OCA2AGG_AGT")
+                self.OCA2Reason= "OCA2AGG_AGT"
             elif (OCA2CGG_TGG == oca):
-                print("OCA2CGG_TGG")
+                self.OCA2Reason= "OCA2CGG_TGG"
             elif (OCA2GTG_TTG == oca):
-                print("OCA2GTG_TTG")
+                self.OCA2Reason= "OCA2GTG_TTG"
             elif (OCA2TGG_TAG == oca):
-                print("OCA2TGG_TAG")
+                self.OCA2Reason= "OCA2TGG_TAG"
             elif (OCA2TTT_TGT == oca):
-                print("OCA2TTT_TGT")
+                self.OCA2Reason=  "OCA2TTT_TGT"
+            qq = "UPDATE patients SET oca2Diseases = %s WHERE TC_ID = %s"
+            val = (self.OCA2Reason, TC_ID)
+            cursor.execute(qq, val)
+            connection.commit()
 
         if (reshbb == "Not Healthy"):
             cursor.execute(hbbQuery)
@@ -270,16 +291,19 @@ class Ui_Dialog(object):
                 # DELTED ASK UGUR # HBBc328G = row[6]
 
             if (HBBATG_AAG == hbb):
-                print("HBBATG_AAG")
+                self.HBBReason= "HBBATG_AAG"
             elif (HBBATG_ACG == hbb):
-                print("HBBATG_ACG")
+                self.HBBReason= "HBBATG_ACG"
             elif (HBBATG_ATA == hbb):
-                print("HBBATG_ATA")
+                self.HBBReason= "HBBATG_ATA"
             elif (HBBATG_ATC == hbb):
-                print("HBBATG_ATC")
+                self.HBBReason= "HBBATG_ATC"
             elif (HBBGTG_ATG == hbb):
-                print("HBBGTG_ATG")
-
+                self.HBBReason= "HBBGTG_ATG"
+            qq = "UPDATE patients SET hbbDiseases = %s WHERE TC_ID = %s"
+            val = (self.HBBReason, TC_ID)
+            cursor.execute(qq, val)
+            connection.commit()
 
     def saveDatabase(self):
         self.manID = self.patientIDMan.text()
