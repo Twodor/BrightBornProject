@@ -342,6 +342,7 @@ class Ui_Dialog(object):
         self.checkMutantGensIfGenIsUnhealthy(self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman, self.httWoman, self.tp53Woman, TC_ID)
         self.cocuk()
 
+
     def xstr(self,s):
         if s is None:
             return " "
@@ -400,6 +401,7 @@ class Ui_Dialog(object):
             pahMAN = row[4]
             httMAN = row[5]
             tp53MAN = row[6]
+            reportIDMan = row[0]
 
             TC_IDMan = row[14]
         selectionQuery = "Select * FROM patients where TC_ID = %s"
@@ -428,6 +430,7 @@ class Ui_Dialog(object):
             httWOMAN = row[5]
             tp53WOMAN = row[6]
             TC_IDWoman = row[14]
+            reportIDWoman = row[0]
         versions = False
 
         cocukhbb2DieaseVersion1 = "No"
@@ -503,16 +506,19 @@ class Ui_Dialog(object):
         TC_IDCocuk = TC_IDMan + TC_IDWoman
         if (versions == True):
             childQ = """Insert Into patients(hbb, cftr, oca2, pah, htt, tp53,
-             reshbb, rescftr, resoca2, respah, reshtt, resp53,
-              TC_ID, hbbDiseases, pahDiseases, cftrDiseases, oca2Diseases, httDiseases, tp53Diseases)
-             Values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-
+             reshbb, rescftr, resoca2, respah, reshtt, resp53,name,
+              TC_ID,doctorID, hbbDiseases, pahDiseases, cftrDiseases, oca2Diseases, httDiseases, tp53Diseases)
+             Values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            name = "kid"
             values = (hbbWOMAN, cftrWOMAN, oca2WOMAN, pahWOMAN, httWOMAN, tp53WOMAN,
-                      cocukhbb, cocukcftr, cocukoca2, cocukpah, cocukhtt, cocuktp53, TC_IDCocuk,
+                      cocukhbb, cocukcftr, cocukoca2, cocukpah, cocukhtt, cocuktp53,name, TC_IDCocuk, self.ID,
                       cocukhbb2DieaseVersion1, cocukpah2DieaseVersion1, cocukcftr2DieaseVersion1,
                       cocukoca2DieaseVersion1, cocukhtt2DieaseVersion1, cocuktp532DieaseVersion1)
             cursor.execute(childQ, values)
             connection.commit()
+        print("Man report ID: ", reportIDMan )
+        print("Woman report ID: ", reportIDWoman)
+        print("Baby reportID: ", reportIDWoman+1)
 
     def browse(self):
         filePath = QFileDialog.getOpenFileName(self, 'Single File',
