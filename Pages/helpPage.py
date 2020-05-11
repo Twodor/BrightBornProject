@@ -57,7 +57,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Brightborn Help"))
         self.label.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:600; color:#4b0071;\">HELP PAGE</span></p></body></html>"))
         self.label_4.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ1</span></p></body></html>"))
         self.label_5.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ2</span></p><p><br/></p></body></html>"))

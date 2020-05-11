@@ -355,14 +355,15 @@ class Ui_Dialog(object):
 
         self.checkHealthStatus(self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman, self.httWoman, self.tp53Woman, TC_ID)
         self.checkMutantGensIfGenIsUnhealthy(self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman, self.httWoman, self.tp53Woman, TC_ID)
-        self.cocuk()
+
+        self.baby()
 
     def xstr(self,s):
         if s is None:
             return " "
         return str(s)
 
-    def cocuk(self):
+    def baby(self):
         qMan = "Select * FROM patients where TC_ID = %s"
         qWoman = "Select * FROM patients where TC_ID = %s"
         qManValue = self.manID
@@ -418,9 +419,11 @@ class Ui_Dialog(object):
             reportIDMan = row[0]
 
             TC_IDMan = row[14]
+
         selectionQuery = "Select * FROM patients where TC_ID = %s"
         cursor.execute(selectionQuery, (qWomanValue,))
         results = cursor.fetchall()
+
 
         for row in results:
             hbbDiseaseWOMAN = row[17]
@@ -453,6 +456,7 @@ class Ui_Dialog(object):
         cocukpah2DieaseVersion1 = ""
         cocukhtt2DieaseVersion1 = ""
         cocuktp532DieaseVersion1 = ""
+
         # hbb
         if (hbbW == "Not Healthy" and hbbM == "Not Healthy"):
             cocukhbb = "Not Healthy"
@@ -515,9 +519,11 @@ class Ui_Dialog(object):
             else:
                 cocuktp532DieaseVersion1 = tp53DiseaseMAN + "" + tp53DiseaseWOMAN
                 versions = True
+
         TC_IDWoman = str(TC_IDWoman)
         TC_IDMan = str(TC_IDMan)
         TC_IDCocuk = TC_IDMan + TC_IDWoman
+
         if (versions == True):
             childQ = """Insert Into patients(hbb, cftr, oca2, pah, htt, tp53,
              reshbb, rescftr, resoca2, respah, reshtt, resp53,name,
@@ -530,9 +536,7 @@ class Ui_Dialog(object):
                       cocukoca2DieaseVersion1, cocukhtt2DieaseVersion1, cocuktp532DieaseVersion1)
             cursor.execute(childQ, values)
             connection.commit()
-            print("Man report ID: ", reportIDMan)
-            print("Woman report ID: ", reportIDWoman)
-            print("Baby reportID: ", reportIDWoman + 1)
+
 
         if(versions == False):
             self.getP0Genes()
@@ -549,9 +553,10 @@ class Ui_Dialog(object):
                       cocukoca2DieaseVersion1, cocukhtt2DieaseVersion1, cocuktp532DieaseVersion1)
             cursor.execute(childQ, values)
             connection.commit()
-            print("Man report ID: ", reportIDMan)
-            print("Woman report ID: ", reportIDWoman)
-            print("Baby reportID: ", reportIDWoman + 1)
+
+        print("Man report ID: ", reportIDMan)
+        print("Woman report ID: ", reportIDWoman)
+        print("Baby reportID: ", reportIDWoman + 1)
 
     def getP0Genes(self):
         query = "Select * from patients where id = 0"
@@ -585,6 +590,32 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(710, 532)
+
+        ##
+
+        self.fullNameMaleLabel = QtWidgets.QLabel(Dialog)
+        self.fullNameMaleLabel.setGeometry(QtCore.QRect(203, 255, 81, 21))
+        self.fullNameMaleLabel.setObjectName("fullNameMaleLabel")
+
+        self.patientIDMaleLabel = QtWidgets.QLabel(Dialog)
+        self.patientIDMaleLabel.setGeometry(QtCore.QRect(203, 315, 81, 21))
+        self.patientIDMaleLabel.setObjectName("patientIDMaleLabel")
+
+        self.fullNameFemaleLabel = QtWidgets.QLabel(Dialog)
+        self.fullNameFemaleLabel.setGeometry(QtCore.QRect(432, 255, 81, 21))
+        self.fullNameFemaleLabel.setObjectName("fullNameFemaleLabel")
+
+
+        self.patientIDFemaleLabel = QtWidgets.QLabel(Dialog)
+        self.patientIDFemaleLabel.setGeometry(QtCore.QRect(432, 315, 81, 21))
+        self.patientIDFemaleLabel.setObjectName("patientIDFemaleLabel")
+
+        self.reportIDLabel = QtWidgets.QLabel(Dialog)
+        self.reportIDLabel.setGeometry(QtCore.QRect(220, 25, 141, 51))
+        self.reportIDLabel.setObjectName("reportIDLabel")
+
+
+        ##
 
         self.line = QtWidgets.QFrame(Dialog)
         self.line.setGeometry(QtCore.QRect(180, 150, 581, 20))
@@ -674,6 +705,12 @@ class Ui_Dialog(object):
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
 
+        self.fullNameMaleLabel.raise_()
+        self.patientIDMaleLabel.raise_()
+        self.fullNameFemaleLabel.raise_()
+        self.patientIDFemaleLabel.raise_()
+        self.reportIDLabel.raise_()
+
         self.radioButtonMale.raise_()
         self.line.raise_()
         self.line_2.raise_()
@@ -697,7 +734,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Submit Report"))
         self.doctorID.setHtml(_translate("Dialog",
                                          "<html><head/><body><p><span style=\" font-size:10pt; color:#4f4f4f;\">Doctor ID: " + self.ID + "</span></p></body></html>"))
         self.doctorName.setHtml(_translate("Dialog",
@@ -711,7 +748,16 @@ class Ui_Dialog(object):
         self.searchReportID.setText(_translate("Dialog", "Check Report"))
         self.submitData.setText(_translate("Dialog", "Submit Data"))
 
-
+        self.fullNameMaleLabel.setText(_translate("Dialog",
+                                                  "<html><head/><body><p><span style=\" font-size:11pt;\">Full Name</span></p><p><br/></p></body></html>"))
+        self.patientIDMaleLabel.setText(_translate("Dialog",
+                                                   "<html><head/><body><p><span style=\" font-size:11pt;\">Patient ID</span></p><p><br/></p></body></html>"))
+        self.fullNameFemaleLabel.setText(_translate("Dialog",
+                                                    "<html><head/><body><p><span style=\" font-size:11pt;\">Full Name</span></p><p><br/></p></body></html>"))
+        self.patientIDFemaleLabel.setText(_translate("Dialog",
+                                                     "<html><head/><body><p><span style=\" font-size:11pt;\">Patient ID</span></p><p><br/></p></body></html>"))
+        self.reportIDLabel.setText(_translate("Dialog",
+                                              "<html><head/><body><p><span style=\" font-size:20pt; color:#7d7d7d;\">Report ID</span></p></body></html>"))
 if __name__ == "__main__":
     import sys
 

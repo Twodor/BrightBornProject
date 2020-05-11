@@ -54,7 +54,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Advenced Report"))
         self.label.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:18pt; color:#5d5d5d;\">Report ID :....................</span></p></body></html>"))
         self.label_3.setText(_translate("Dialog", "<html><head/><body><p><span style=\" color:#ff0000;\">There will be no colored</span></p><p><span style=\" color:#ff0000;\">information , in addition there</span></p><p><span style=\" color:#ff0000;\">will be all the information about</span></p><p><span style=\" color:#ff0000;\">performed text by the </span><a href=\"www.BrightBorn.com\"><span style=\" text-decoration: underline; color:#0055ff;\">BrightBorn </span></a></p><p><span style=\" color:#ff0000;\">for the research purposea </span></p></body></html>"))
 

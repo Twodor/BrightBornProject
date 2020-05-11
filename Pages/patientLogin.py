@@ -49,7 +49,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Patient Login"))
         self.label.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:36pt; color:#6a6967;\">BrightBorn</span></p></body></html>"))
         self.label_2.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:24pt; color:#43a0a1;\">Patient</span></p></body></html>"))
         self.label_3.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:14pt; color:#7e7e7e;\">Report ID :</span></p></body></html>"))
