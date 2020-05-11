@@ -155,10 +155,13 @@ class Ui_Dialog(object):
                 self.TP53Reason = "TP53GAT_GAX"
             elif (TP53GCC_TGC == tp53):
                 self.TP53Reason = "TP53GCC_TGC"
-            qq = "UPDATE patients SET tp53Diseases = %s WHERE TC_ID = %s"
-            val = (self.TP53Reason, TC_ID)
-            cursor.execute(qq, val)
-            connection.commit()
+        else:
+            self.TP53Reason = ""
+
+        qq = "UPDATE patients SET tp53Diseases = %s WHERE TC_ID = %s"
+        val = (self.TP53Reason, TC_ID)
+        cursor.execute(qq, val)
+        connection.commit()
 
         if (respah == "Not Healthy"):
             cursor.execute(pahQuery)
@@ -182,10 +185,13 @@ class Ui_Dialog(object):
                 self.PAHReason = "PAHGAA_TAA"
             elif (PAHGCC_GAC == pah):
                 self.PAHReason = "PAHGCC_GAC"
-            qq = "UPDATE patients SET pahDiseases = %s WHERE TC_ID = %s"
-            val = (self.PAHReason, TC_ID)
-            cursor.execute(qq, val)
-            connection.commit()
+        else:
+            self.PAHReason = ""
+        qq = "UPDATE patients SET pahDiseases = %s WHERE TC_ID = %s"
+        val = (self.PAHReason, TC_ID)
+        cursor.execute(qq, val)
+        connection.commit()
+
 
         if (reshtt == "Not Healthy"):
             cursor.execute(httQuery)
@@ -206,10 +212,12 @@ class Ui_Dialog(object):
                 self.HTTReason = "httACG_ATG"
             elif (httCCG_CTG == htt):
                 self.HTTReason = "httCCG_CTG"
-            qq = "UPDATE patients SET httDiseases = %s WHERE TC_ID = %s"
-            val = (self.HTTReason, TC_ID)
-            cursor.execute(qq, val)
-            connection.commit()
+        else:
+            self.HTTReason = ""
+        qq = "UPDATE patients SET httDiseases = %s WHERE TC_ID = %s"
+        val = (self.HTTReason, TC_ID)
+        cursor.execute(qq, val)
+        connection.commit()
 
         if (rescftr == "Not Healthy"):
             cursor.execute(cftrQuery)
@@ -243,10 +251,12 @@ class Ui_Dialog(object):
                 self.CFTRReason = "cftr870"
             elif (cftr3874 == cftr):
                 self.CFTRReason = "cftr3874"
-            qq = "UPDATE patients SET cftrDiseases = %s WHERE TC_ID = %s"
-            val = (self.CFTRReason, TC_ID)
-            cursor.execute(qq, val)
-            connection.commit()
+        else:
+            self.CFTRReason = ""
+        qq = "UPDATE patients SET cftrDiseases = %s WHERE TC_ID = %s"
+        val = (self.CFTRReason, TC_ID)
+        cursor.execute(qq, val)
+        connection.commit()
 
         if (resoca2 == "Not Healthy"):
             cursor.execute(oca2Query)
@@ -270,11 +280,14 @@ class Ui_Dialog(object):
             elif (OCA2TGG_TAG == oca):
                 self.OCA2Reason= "OCA2TGG_TAG"
             elif (OCA2TTT_TGT == oca):
-                self.OCA2Reason=  "OCA2TTT_TGT"
-            qq = "UPDATE patients SET oca2Diseases = %s WHERE TC_ID = %s"
-            val = (self.OCA2Reason, TC_ID)
-            cursor.execute(qq, val)
-            connection.commit()
+                self.OCA2Reason= "OCA2TTT_TGT"
+        else:
+            self.OCA2Reason = ""
+        qq = "UPDATE patients SET oca2Diseases = %s WHERE TC_ID = %s"
+        val = (self.OCA2Reason, TC_ID)
+        cursor.execute(qq, val)
+        connection.commit()
+
 
         if (reshbb == "Not Healthy"):
             cursor.execute(hbbQuery)
@@ -297,10 +310,12 @@ class Ui_Dialog(object):
                 self.HBBReason= "HBBATG_ATC"
             elif (HBBGTG_ATG == hbb):
                 self.HBBReason= "HBBGTG_ATG"
-            qq = "UPDATE patients SET hbbDiseases = %s WHERE TC_ID = %s"
-            val = (self.HBBReason, TC_ID)
-            cursor.execute(qq, val)
-            connection.commit()
+        else:
+            self.HBBReason = ""
+        qq = "UPDATE patients SET hbbDiseases = %s WHERE TC_ID = %s"
+        val = (self.HBBReason, TC_ID)
+        cursor.execute(qq, val)
+        connection.commit()
 
     def saveDatabase(self):
         self.manID = self.patientIDMan.text()
@@ -433,12 +448,12 @@ class Ui_Dialog(object):
             reportIDWoman = row[0]
         versions = False
 
-        cocukhbb2DieaseVersion1 = "No"
-        cocukoca2DieaseVersion1 = "No"
-        cocukcftr2DieaseVersion1 = "No"
-        cocukpah2DieaseVersion1 = "No"
-        cocukhtt2DieaseVersion1 = "No"
-        cocuktp532DieaseVersion1 = "No"
+        cocukhbb2DieaseVersion1 = ""
+        cocukoca2DieaseVersion1 = ""
+        cocukcftr2DieaseVersion1 = ""
+        cocukpah2DieaseVersion1 = ""
+        cocukhtt2DieaseVersion1 = ""
+        cocuktp532DieaseVersion1 = ""
         # hbb
         if (hbbW == "Not Healthy" and hbbM == "Not Healthy"):
             cocukhbb = "Not Healthy"
