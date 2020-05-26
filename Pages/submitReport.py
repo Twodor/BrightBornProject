@@ -26,6 +26,7 @@ oca2Query = "SELECT * FROM oca2mutant"
 tp53Query = "SELECT * FROM tp53mutant"
 pahQuery = "SELECT  * FROM  pahmutant"
 
+
 class Ui_Dialog(object):
     def __init__(self, name, surname, ID):
         self.name = name
@@ -65,56 +66,55 @@ class Ui_Dialog(object):
         self.oca2Woman = a[1913470:2257870]
 
     def checkHealthStatus(self, hbb, cftr, oca, pah, htt, tp53, TC_ID):
-            selectionQuery = "Select * FROM patients where id = 0"
-            insertionHealthStatus = "UPDATE patients SET reshbb = %s, rescftr = %s, resoca2 = %s, respah = %s, reshtt = %s, resp53 = %s WHERE TC_ID = %s"
+        selectionQuery = "Select * FROM patients where id = 0"
+        insertionHealthStatus = "UPDATE patients SET reshbb = %s, rescftr = %s, resoca2 = %s, respah = %s, reshtt = %s, resp53 = %s WHERE TC_ID = %s"
 
-            cursor.execute(selectionQuery)
-            HEALTHY_records = cursor.fetchall()
+        cursor.execute(selectionQuery)
+        HEALTHY_records = cursor.fetchall()
 
-            for row in HEALTHY_records:
-                HEALTHYhbb = row[1]
-                HEALTHYcftr = row[2]
-                HEALTHYoca = row[3]
-                HEALTHYpah = row[4]
-                HEALTHYhtt = row[5]
-                HEALTHYtp53 = row[6]
+        for row in HEALTHY_records:
+            HEALTHYhbb = row[1]
+            HEALTHYcftr = row[2]
+            HEALTHYoca = row[3]
+            HEALTHYpah = row[4]
+            HEALTHYhtt = row[5]
+            HEALTHYtp53 = row[6]
 
+        if HEALTHYhbb == hbb:
+            hbbStatus = "healthy"
+        else:
+            hbbStatus = "Not Healthy"
 
-            if HEALTHYhbb == hbb:
-                hbbStatus = "healthy"
-            else:
-                hbbStatus = "Not Healthy"
+        if HEALTHYcftr == cftr:
+            cftrStatus = "healthy"
+        else:
+            cftrStatus = "Not Healthy"
 
-            if HEALTHYcftr == cftr:
-                cftrStatus = "healthy"
-            else:
-                cftrStatus = "Not Healthy"
+        if HEALTHYoca == oca:
+            oca2Status = "healthy"
+        else:
+            oca2Status = "Not Healthy"
 
-            if HEALTHYoca == oca:
-                oca2Status = "healthy"
-            else:
-                oca2Status = "Not Healthy"
+        if HEALTHYpah == pah:
+            pahStatus = "healthy"
+        else:
+            pahStatus = "Not Healthy"
 
-            if HEALTHYpah == pah:
-                pahStatus = "healthy"
-            else:
-                pahStatus = "Not Healthy"
+        if HEALTHYhtt == htt:
+            httStatus = "healthy"
+        else:
+            httStatus = "Not Healthy"
 
-            if HEALTHYhtt == htt:
-                httStatus = "healthy"
-            else:
-                httStatus = "Not Healthy"
+        if HEALTHYtp53 == tp53:
+            tp53Status = "healthy"
+        else:
+            tp53Status = "Not Healthy"
 
-            if HEALTHYtp53 == tp53:
-                tp53Status = "healthy"
-            else:
-                tp53Status = "Not Healthy"
+        healthValues = (hbbStatus, cftrStatus, oca2Status, pahStatus, httStatus, tp53Status, TC_ID)
+        cursor.execute(insertionHealthStatus, healthValues)
+        connection.commit()
 
-            healthValues = (hbbStatus, cftrStatus, oca2Status, pahStatus, httStatus, tp53Status, TC_ID)
-            cursor.execute(insertionHealthStatus, healthValues)
-            connection.commit()
-
-            self.checkMutantGensIfGenIsUnhealthy(hbb, cftr, oca, pah, htt, tp53, TC_ID)
+        self.checkMutantGensIfGenIsUnhealthy(hbb, cftr, oca, pah, htt, tp53, TC_ID)
 
     def checkMutantGensIfGenIsUnhealthy(self, hbb, cftr, oca, pah, htt, tp53, TC_ID):
         selectionQuery = "Select * FROM patients where TC_ID = %s"
@@ -129,8 +129,7 @@ class Ui_Dialog(object):
             reshtt = row[11]
             restp53 = row[12]
 
-
-        if (restp53 == "Not Healthy"):
+        if restp53 == "Not Healthy":
             cursor.execute(tp53Query)
             result = cursor.fetchall()
             for rows in result:
@@ -141,19 +140,19 @@ class Ui_Dialog(object):
                 TP53GAG_AAG = rows[5]
                 TP53GAT_GAX = rows[6]
                 TP53GCC_TGC = rows[7]
-            if (TP53AGT_AGX == tp53):
+            if TP53AGT_AGX == tp53:
                 self.TP53Reason = "TP53AGT_AGX"
-            elif (TP53CGA_TGA == tp53):
+            elif TP53CGA_TGA == tp53:
                 self.TP53Reason = "TP53CGA_TGA"
-            elif (TP53CGG_TGG == tp53):
+            elif TP53CGG_TGG == tp53:
                 self.TP53Reason = "TP53CGG_TGG"
-            elif (TP53GAA_AAA == tp53):
+            elif TP53GAA_AAA == tp53:
                 self.TP53Reason = "TP53GAA_AAA"
-            elif (TP53GAG_AAG == tp53):
+            elif TP53GAG_AAG == tp53:
                 self.TP53Reason = "TP53GAG_AAG"
-            elif (TP53GAT_GAX == tp53):
+            elif TP53GAT_GAX == tp53:
                 self.TP53Reason = "TP53GAT_GAX"
-            elif (TP53GCC_TGC == tp53):
+            elif TP53GCC_TGC == tp53:
                 self.TP53Reason = "TP53GCC_TGC"
         else:
             self.TP53Reason = ""
@@ -163,7 +162,7 @@ class Ui_Dialog(object):
         cursor.execute(qq, val)
         connection.commit()
 
-        if (respah == "Not Healthy"):
+        if respah == "Not Healthy":
             cursor.execute(pahQuery)
             result = cursor.fetchall()
             for rows in result:
@@ -173,17 +172,17 @@ class Ui_Dialog(object):
                 PAHCGC_GGC = rows[4]
                 PAHGAA_TAA = rows[5]
                 PAHGCC_GAC = rows[6]
-            if (PAH42AAA_GAA == pah):
+            if PAH42AAA_GAA == pah:
                 self.PAHReason = "PAH42AAA_GAA"
-            elif (PAHATG_AGG == pah):
+            elif PAHATG_AGG == pah:
                 self.PAHReason = "PAHATG_AGG"
-            elif (PAHCAG_CAC == pah):
+            elif PAHCAG_CAC == pah:
                 self.PAHReason = "PAHCAG_CAC"
-            elif (PAHCGC_GGC == pah):
+            elif PAHCGC_GGC == pah:
                 self.PAHReason = "PAHCGC_GGC"
-            elif (PAHGAA_TAA == pah):
+            elif PAHGAA_TAA == pah:
                 self.PAHReason = "PAHGAA_TAA"
-            elif (PAHGCC_GAC == pah):
+            elif PAHGCC_GAC == pah:
                 self.PAHReason = "PAHGCC_GAC"
         else:
             self.PAHReason = ""
@@ -192,8 +191,7 @@ class Ui_Dialog(object):
         cursor.execute(qq, val)
         connection.commit()
 
-
-        if (reshtt == "Not Healthy"):
+        if reshtt == "Not Healthy":
             cursor.execute(httQuery)
             result = cursor.fetchall()
             for rows in result:
@@ -202,15 +200,15 @@ class Ui_Dialog(object):
                 htt120 = rows[3]
                 httACG_ATG = rows[4]
                 httCCG_CTG = rows[5]
-            if (htt40 == htt):
+            if htt40 == htt:
                 self.HTTReason = "htt40"
-            elif (htt65 == htt):
+            elif htt65 == htt:
                 self.HTTReason = "htt65"
-            elif (htt120 == htt):
+            elif htt120 == htt:
                 self.HTTReason = "htt120"
-            elif (httACG_ATG == htt):
+            elif httACG_ATG == htt:
                 self.HTTReason = "httACG_ATG"
-            elif (httCCG_CTG == htt):
+            elif httCCG_CTG == htt:
                 self.HTTReason = "httCCG_CTG"
         else:
             self.HTTReason = ""
@@ -219,7 +217,7 @@ class Ui_Dialog(object):
         cursor.execute(qq, val)
         connection.commit()
 
-        if (rescftr == "Not Healthy"):
+        if rescftr == "Not Healthy":
             cursor.execute(cftrQuery)
             result = cursor.fetchall()
             for rows in result:
@@ -233,23 +231,23 @@ class Ui_Dialog(object):
                 cftr870 = rows[8]
                 cftr3874 = rows[9]
 
-            if (cftr188 == cftr):
+            if cftr188 == cftr:
                 self.CFTRReason = "cftr188"
-            elif (cftr1456 == cftr):
+            elif cftr1456 == cftr:
                 self.CFTRReason = "cftr1456"
-            elif (cftr1526 == cftr):
+            elif cftr1526 == cftr:
                 self.CFTRReason = "cftr1526"
-            elif (cftr1567 == cftr):
+            elif cftr1567 == cftr:
                 self.CFTRReason = "cftr1567"
-            elif (cftr1717 == cftr):
+            elif cftr1717 == cftr:
                 self.CFTRReason = "cftr1717"
-            elif (cftr220 == cftr):
+            elif cftr220 == cftr:
                 self.CFTRReason = "cftr220"
-            elif (cftr3808 == cftr):
+            elif cftr3808 == cftr:
                 self.CFTRReason = "cftr3808"
-            elif (cftr870 == cftr):
+            elif cftr870 == cftr:
                 self.CFTRReason = "cftr870"
-            elif (cftr3874 == cftr):
+            elif cftr3874 == cftr:
                 self.CFTRReason = "cftr3874"
         else:
             self.CFTRReason = ""
@@ -258,7 +256,7 @@ class Ui_Dialog(object):
         cursor.execute(qq, val)
         connection.commit()
 
-        if (resoca2 == "Not Healthy"):
+        if resoca2 == "Not Healthy":
             cursor.execute(oca2Query)
             result = cursor.fetchall()
             for rows in result:
@@ -269,18 +267,18 @@ class Ui_Dialog(object):
                 OCA2TGG_TAG = rows[4].replace("\n", "")
                 OCA2TTT_TGT = rows[5].replace("\n", "")
 
-            if (OCA2GGA_AGA == oca):
-                self.OCA2Reason= "OCA2GGA_AGA"
-            elif (OCA2AGG_AGT == oca):
-                self.OCA2Reason= "OCA2AGG_AGT"
-            elif (OCA2CGG_TGG == oca):
-                self.OCA2Reason= "OCA2CGG_TGG"
-            elif (OCA2GTG_TTG == oca):
-                self.OCA2Reason= "OCA2GTG_TTG"
-            elif (OCA2TGG_TAG == oca):
-                self.OCA2Reason= "OCA2TGG_TAG"
-            elif (OCA2TTT_TGT == oca):
-                self.OCA2Reason= "OCA2TTT_TGT"
+            if OCA2GGA_AGA == oca:
+                self.OCA2Reason = "OCA2GGA_AGA"
+            elif OCA2AGG_AGT == oca:
+                self.OCA2Reason = "OCA2AGG_AGT"
+            elif OCA2CGG_TGG == oca:
+                self.OCA2Reason = "OCA2CGG_TGG"
+            elif OCA2GTG_TTG == oca:
+                self.OCA2Reason = "OCA2GTG_TTG"
+            elif OCA2TGG_TAG == oca:
+                self.OCA2Reason = "OCA2TGG_TAG"
+            elif OCA2TTT_TGT == oca:
+                self.OCA2Reason = "OCA2TTT_TGT"
         else:
             self.OCA2Reason = ""
         qq = "UPDATE patients SET oca2Diseases = %s WHERE TC_ID = %s"
@@ -288,8 +286,7 @@ class Ui_Dialog(object):
         cursor.execute(qq, val)
         connection.commit()
 
-
-        if (reshbb == "Not Healthy"):
+        if reshbb == "Not Healthy":
             cursor.execute(hbbQuery)
             result = cursor.fetchall()
             for rows in result:
@@ -300,16 +297,16 @@ class Ui_Dialog(object):
                 HBBGTG_ATG = rows[5].replace("\n", "")
                 # DELTED ASK UGUR # HBBc328G = row[6]
 
-            if (HBBATG_AAG == hbb):
-                self.HBBReason= "HBBATG_AAG"
-            elif (HBBATG_ACG == hbb):
-                self.HBBReason= "HBBATG_ACG"
-            elif (HBBATG_ATA == hbb):
-                self.HBBReason= "HBBATG_ATA"
-            elif (HBBATG_ATC == hbb):
-                self.HBBReason= "HBBATG_ATC"
-            elif (HBBGTG_ATG == hbb):
-                self.HBBReason= "HBBGTG_ATG"
+            if HBBATG_AAG == hbb:
+                self.HBBReason = "HBBATG_AAG"
+            elif HBBATG_ACG == hbb:
+                self.HBBReason = "HBBATG_ACG"
+            elif HBBATG_ATA == hbb:
+                self.HBBReason = "HBBATG_ATA"
+            elif HBBATG_ATC == hbb:
+                self.HBBReason = "HBBATG_ATC"
+            elif HBBGTG_ATG == hbb:
+                self.HBBReason = "HBBGTG_ATG"
         else:
             self.HBBReason = ""
         qq = "UPDATE patients SET hbbDiseases = %s WHERE TC_ID = %s"
@@ -330,8 +327,8 @@ class Ui_Dialog(object):
                 "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
         valuesMan = (
-        self.hbbMan, self.cftrMan, self.oca2Man, self.pahMan, self.httMan, self.tp53Man, self.manName, self.manID,
-        self.ID)
+            self.hbbMan, self.cftrMan, self.oca2Man, self.pahMan, self.httMan, self.tp53Man, self.manName, self.manID,
+            self.ID)
 
         cursor.execute(query, valuesMan)
         connection.commit()
@@ -342,9 +339,12 @@ class Ui_Dialog(object):
             TC_ID = row[14]
 
         self.checkHealthStatus(self.hbbMan, self.cftrMan, self.oca2Man, self.pahMan, self.httMan, self.tp53Man, TC_ID)
-        self.checkMutantGensIfGenIsUnhealthy(self.hbbMan, self.cftrMan, self.oca2Man, self.pahMan, self.httMan, self.tp53Man, TC_ID)
+        self.checkMutantGensIfGenIsUnhealthy(self.hbbMan, self.cftrMan, self.oca2Man, self.pahMan, self.httMan,
+                                             self.tp53Man, TC_ID)
 
-        valuesWoman = (self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman, self.httWoman, self.tp53Woman, self.WomanName, self.WomanID, self.ID)
+        valuesWoman = (
+        self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman, self.httWoman, self.tp53Woman, self.WomanName,
+        self.WomanID, self.ID)
         cursor.execute(query, valuesWoman)
         connection.commit()
 
@@ -353,15 +353,30 @@ class Ui_Dialog(object):
         for row in result:
             TC_ID = row[14]
 
-        self.checkHealthStatus(self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman, self.httWoman, self.tp53Woman, TC_ID)
-        self.checkMutantGensIfGenIsUnhealthy(self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman, self.httWoman, self.tp53Woman, TC_ID)
+        self.checkHealthStatus(self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman, self.httWoman,
+                               self.tp53Woman, TC_ID)
+        self.checkMutantGensIfGenIsUnhealthy(self.hbbWoman, self.cftrWoman, self.oca2Woman, self.pahWoman,
+                                             self.httWoman, self.tp53Woman, TC_ID)
 
         self.baby()
 
-    def xstr(self,s):
+    def xstr(self, s):
         if s is None:
             return " "
         return str(s)
+
+    def combine(self, paternal, maternal, current):
+        tempList = []
+        if (isinstance(current, str)):
+            tempList = [current + paternal, current + maternal]
+        elif (isinstance(current, type([]))):
+            length = len(current)
+
+            for i in range(0, length):
+                tempList.append(current[i] + paternal)
+                tempList.append(current[i] + maternal)
+
+        return tempList
 
     def baby(self):
         qMan = "Select * FROM patients where TC_ID = %s"
@@ -410,12 +425,12 @@ class Ui_Dialog(object):
             httDiseaseMAN = self.xstr(httDiseaseMAN)
             tp53DiseaseMAN = self.xstr(tp53DiseaseMAN)
 
-            hbbMAN = row[1]
-            cftrMAN = row[2]
-            oca2MAN = row[3]
-            pahMAN = row[4]
-            httMAN = row[5]
-            tp53MAN = row[6]
+            self.hbbMAN = row[1]
+            self.cftrMAN = row[2]
+            self.oca2MAN = row[3]
+            self.pahMAN = row[4]
+            self.httMAN = row[5]
+            self.tp53MAN = row[6]
             reportIDMan = row[0]
 
             TC_IDMan = row[14]
@@ -423,7 +438,6 @@ class Ui_Dialog(object):
         selectionQuery = "Select * FROM patients where TC_ID = %s"
         cursor.execute(selectionQuery, (qWomanValue,))
         results = cursor.fetchall()
-
 
         for row in results:
             hbbDiseaseWOMAN = row[17]
@@ -440,13 +454,13 @@ class Ui_Dialog(object):
             httDiseaseWOMAN = self.xstr(httDiseaseWOMAN)
             tp53DiseaseWOMAN = self.xstr(tp53DiseaseWOMAN)
 
-            hbbWOMAN = row[1]
-            cftrWOMAN = row[2]
-            oca2WOMAN = row[3]
-            pahWOMAN = row[4]
-            httWOMAN = row[5]
-            tp53WOMAN = row[6]
-            TC_IDWoman = row[14]
+            self.hbbWOMAN = row[1]
+            self.cftrWOMAN = row[2]
+            self.oca2WOMAN = row[3]
+            self.pahWOMAN = row[4]
+            self.httWOMAN = row[5]
+            self.tp53WOMAN = row[6]
+            self.TC_IDWoman = row[14]
             reportIDWoman = row[0]
         versions = False
 
@@ -457,10 +471,28 @@ class Ui_Dialog(object):
         cocukhtt2DieaseVersion1 = ""
         cocuktp532DieaseVersion1 = ""
 
+        self.AMan = str(self.cftrMAN) + str(self.hbbMAN) + str(self.httMAN)
+        self.BMan = str(self.tp53MAN) + str(self.pahMAN)
+        self.CMan = str(self.oca2MAN)
+        self.AWoman = str(self.cftrWOMAN) + str(self.hbbWOMAN) + str(self.httWOMAN)
+        self.BWoman = str(self.tp53WOMAN) + str(self.pahWOMAN)
+        self.CWoman = str(self.oca2WOMAN)
+
+        self.tempPaternalManlList = [self.AMan, self.BMan, self.CMan]
+
+        self.tempPaternalWomanlList = [self.AWoman, self.BWoman, self.CWoman]
+
+        self.exListOffSpring = []
+
+        self.linkeagedGenNumber = 3
+        self.exListOffSpring = self.combine(self.tempPaternalManlList[0], self.tempPaternalWomanlList[0], "")
+        for i in range(1, self.linkeagedGenNumber):
+            self.exListOffSpring = self.combine(self.tempPaternalManlList[i], self.tempPaternalWomanlList[i], self.exListOffSpring)
+
         # hbb
-        if (hbbW == "Not Healthy" and hbbM == "Not Healthy"):
+        if hbbW == "Not Healthy" and hbbM == "Not Healthy":
             cocukhbb = "Not Healthy"
-            if (hbbDiseaseMAN == hbbDiseaseWOMAN):
+            if hbbDiseaseMAN == hbbDiseaseWOMAN:
                 cocukhbb2DieaseVersion1 = hbbDiseaseWOMAN
             else:
                 cocukhbb2DieaseVersion1 = hbbDiseaseWOMAN + "" + hbbDiseaseMAN
@@ -469,76 +501,75 @@ class Ui_Dialog(object):
             cocukhbb = "Healthy"
 
         # oca2
-        if (oca2M == "healthy" and oca2W == "healthy"):
+        if oca2M == "healthy" and oca2W == "healthy":
             cocukoca2 = "Healthy"
         else:
             cocukoca2 = "Not Healthy"
-            if (oca2DiseaseWOMAN == ocaDisease2MAN):
+            if oca2DiseaseWOMAN == ocaDisease2MAN:
                 cocukoca2DieaseVersion1 = ocaDisease2MAN
             else:
                 cocukoca2DieaseVersion1 = oca2DiseaseWOMAN + "" + ocaDisease2MAN
                 versions = True
 
         # cftr
-        if (cftrM == "healthy" and cftrW == "healthy"):
+        if cftrM == "healthy" and cftrW == "healthy":
             cocukcftr = "Healthy"
         else:
             cocukcftr = "Not Healthy"
-            if (cftrDiseaseMAN == cftrDiseaseWOMAN):
+            if cftrDiseaseMAN == cftrDiseaseWOMAN:
                 cocukcftr2DieaseVersion1 = cftrDiseaseMAN
             else:
                 cocukcftr2DieaseVersion1 = cftrDiseaseWOMAN + "" + cftrDiseaseMAN
                 versions = True
         # pah
-        if (pahW == "healthy" and pahM == "healthy"):
+        if pahW == "healthy" and pahM == "healthy":
             cocukpah = "Healthy"
         else:
             cocukpah = "Not Healthy"
-            if (pahDiseaseMAN == pahDiseaseWOMAN):
+            if pahDiseaseMAN == pahDiseaseWOMAN:
                 cocukpah2DieaseVersion1 = pahDiseaseMAN
             else:
                 cocukpah2DieaseVersion1 = pahDiseaseWOMAN + "" + pahDiseaseMAN
                 versions = True
         # htt
-        if (httW == "healthy" and httM == "healthy"):
+        if httW == "healthy" and httM == "healthy":
             cocukhtt = "Healthy"
         else:
             cocukhtt = "Not Healthy"
-            if (httDiseaseMAN == httDiseaseWOMAN):
+            if httDiseaseMAN == httDiseaseWOMAN:
                 cocukhtt2DieaseVersion1 = httDiseaseMAN
             else:
                 cocukhtt2DieaseVersion1 = httDiseaseWOMAN + "" + httDiseaseMAN
                 versions = True
         # tp53
-        if (tp53W == "healthy" and tp53M == "healthy"):
+        if tp53W == "healthy" and tp53M == "healthy":
             cocuktp53 = "Healthy"
         else:
             cocuktp53 = "Not Healthy"
-            if (tp53DiseaseMAN == tp53DiseaseWOMAN):
+            if tp53DiseaseMAN == tp53DiseaseWOMAN:
                 cocuktp532DieaseVersion1 = tp53DiseaseWOMAN
             else:
                 cocuktp532DieaseVersion1 = tp53DiseaseMAN + "" + tp53DiseaseWOMAN
                 versions = True
 
-        TC_IDWoman = str(TC_IDWoman)
+        TC_IDWoman = str(self.TC_IDWoman)
         TC_IDMan = str(TC_IDMan)
         TC_IDCocuk = TC_IDMan + TC_IDWoman
 
-        if (versions == True):
+        if versions == True:
             childQ = """Insert Into patients(hbb, cftr, oca2, pah, htt, tp53,
              reshbb, rescftr, resoca2, respah, reshtt, resp53,name,
               TC_ID,doctorID, hbbDiseases, pahDiseases, cftrDiseases, oca2Diseases, httDiseases, tp53Diseases)
              Values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
             name = "kid"
-            values = (hbbWOMAN, cftrWOMAN, oca2WOMAN, pahWOMAN, httWOMAN, tp53WOMAN,
-                      cocukhbb, cocukcftr, cocukoca2, cocukpah, cocukhtt, cocuktp53,name, TC_IDCocuk, self.ID,
+            values = (self.hbbWOMAN, self.cftrWOMAN, self.oca2WOMAN, self.pahWOMAN, self.httWOMAN, self.tp53WOMAN,
+                      cocukhbb, cocukcftr, cocukoca2, cocukpah, cocukhtt, cocuktp53, name, TC_IDCocuk, self.ID,
                       cocukhbb2DieaseVersion1, cocukpah2DieaseVersion1, cocukcftr2DieaseVersion1,
                       cocukoca2DieaseVersion1, cocukhtt2DieaseVersion1, cocuktp532DieaseVersion1)
             cursor.execute(childQ, values)
             connection.commit()
 
-
-        if(versions == False):
+        if versions == False:
             self.getP0Genes()
             print(self.hbb0)
 
@@ -605,7 +636,6 @@ class Ui_Dialog(object):
         self.fullNameFemaleLabel.setGeometry(QtCore.QRect(432, 255, 81, 21))
         self.fullNameFemaleLabel.setObjectName("fullNameFemaleLabel")
 
-
         self.patientIDFemaleLabel = QtWidgets.QLabel(Dialog)
         self.patientIDFemaleLabel.setGeometry(QtCore.QRect(432, 315, 81, 21))
         self.patientIDFemaleLabel.setObjectName("patientIDFemaleLabel")
@@ -613,7 +643,6 @@ class Ui_Dialog(object):
         self.reportIDLabel = QtWidgets.QLabel(Dialog)
         self.reportIDLabel.setGeometry(QtCore.QRect(220, 25, 141, 51))
         self.reportIDLabel.setObjectName("reportIDLabel")
-
 
         ##
 
@@ -658,7 +687,8 @@ class Ui_Dialog(object):
         self.saveButtonMan.setText("")
 
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../images/submit.jpeg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("C:/Users/cemmo/PycharmProjects/BrightBorn/images/submit.jpeg"),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.saveButtonMan.setIcon(icon)
         self.saveButtonMan.setIconSize(QtCore.QSize(32, 32))
         self.saveButtonMan.setObjectName("pushButton_2")
@@ -701,7 +731,7 @@ class Ui_Dialog(object):
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(40, 20, 111, 171))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../images/doctor.png"))
+        self.label.setPixmap(QtGui.QPixmap("C:/Users/cemmo/PycharmProjects/BrightBorn/images/doctor.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
 
@@ -732,6 +762,8 @@ class Ui_Dialog(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+
+
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Submit Report"))
@@ -758,6 +790,8 @@ class Ui_Dialog(object):
                                                      "<html><head/><body><p><span style=\" font-size:11pt;\">Patient ID</span></p><p><br/></p></body></html>"))
         self.reportIDLabel.setText(_translate("Dialog",
                                               "<html><head/><body><p><span style=\" font-size:20pt; color:#7d7d7d;\">Report ID</span></p></body></html>"))
+
+
 if __name__ == "__main__":
     import sys
 

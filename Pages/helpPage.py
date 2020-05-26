@@ -9,6 +9,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Dialog(object):
+
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(771, 474)
@@ -39,18 +41,35 @@ class Ui_Dialog(object):
         self.label_7 = QtWidgets.QLabel(Dialog)
         self.label_7.setGeometry(QtCore.QRect(510, 300, 71, 41))
         self.label_7.setObjectName("label_7")
-        self.textBrowser = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser.setGeometry(QtCore.QRect(60, 150, 261, 131))
-        self.textBrowser.setObjectName("textBrowser")
-        self.textBrowser_2 = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser_2.setGeometry(QtCore.QRect(60, 330, 261, 131))
-        self.textBrowser_2.setObjectName("textBrowser_2")
-        self.textBrowser_3 = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser_3.setGeometry(QtCore.QRect(410, 150, 261, 131))
-        self.textBrowser_3.setObjectName("textBrowser_3")
-        self.textBrowser_4 = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser_4.setGeometry(QtCore.QRect(410, 330, 261, 131))
-        self.textBrowser_4.setObjectName("textBrowser_4")
+
+        self.faq1 = "Forgot my ID  \n\nPlease contact with your doctor to define new ID"
+        self.faq2 = "Forgot my Password \n\nPlease contact with ugur.dura.2020@mumail.ie with your name"
+        self.faq3 = "How can I get knowledge about diseases ? \n\nYou can use BrightBorn's detailed report part. It will recruit you to our int-network data provider"
+        self.faq4 = "My files did not recognized by program \n\nPlease be sure that, BrightBorn support only FATSA format with txt. extension"
+
+        self.FAQ1 = QtWidgets.QTextBrowser(Dialog)
+        self.FAQ1.setGeometry(QtCore.QRect(60, 150, 261, 131))
+        self.FAQ1.setObjectName("textBrowser")
+        self.FAQ1.setFontPointSize(12)
+        self.FAQ1.setText(self.faq1)
+
+        self.FAQ2 = QtWidgets.QTextBrowser(Dialog)
+        self.FAQ2.setGeometry(QtCore.QRect(60, 330, 261, 131))
+        self.FAQ2.setObjectName("textBrowser_2")
+        self.FAQ2.setFontPointSize(12)
+        self.FAQ2.setText(self.faq2)
+
+        self.FAQ3 = QtWidgets.QTextBrowser(Dialog)
+        self.FAQ3.setGeometry(QtCore.QRect(410, 150, 261, 131))
+        self.FAQ3.setObjectName("textBrowser_3")
+        self.FAQ3.setFontPointSize(12)
+        self.FAQ3.setText(self.faq3)
+
+        self.FAQ4 = QtWidgets.QTextBrowser(Dialog)
+        self.FAQ4.setGeometry(QtCore.QRect(410, 330, 261, 131))
+        self.FAQ4.setObjectName("textBrowser_4")
+        self.FAQ4.setFontPointSize(12)
+        self.FAQ4.setText(self.faq4)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -59,10 +78,10 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Brightborn Help"))
         self.label.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:24pt; font-weight:600; color:#4b0071;\">HELP PAGE</span></p></body></html>"))
-        self.label_4.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ1</span></p></body></html>"))
-        self.label_5.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ2</span></p><p><br/></p></body></html>"))
-        self.label_6.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ3</span></p><p><br/></p></body></html>"))
-        self.label_7.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ3</span></p><p><br/></p></body></html>"))
+        self.label_4.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ 1</span></p></body></html>"))
+        self.label_5.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ 2</span></p><p><br/></p></body></html>"))
+        self.label_6.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ 3</span></p><p><br/></p></body></html>"))
+        self.label_7.setText(_translate("Dialog", "<html><head/><body><p><span style=\" font-size:20pt; color:#55aaff;\">FAQ 4</span></p><p><br/></p></body></html>"))
 
 
 if __name__ == "__main__":

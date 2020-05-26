@@ -5,10 +5,14 @@
 # Created by: PyQt5 UI code generator 5.6
 #
 # WARNING! All changes made in this file will be lost!
-
+import pygame
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QColor, QTextCursor
+from PyQt5.QtWidgets import QListWidgetItem
+
 
 class Ui_Dialog(object):
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(780, 486)
@@ -39,15 +43,27 @@ class Ui_Dialog(object):
         self.label_4 = QtWidgets.QLabel(Dialog)
         self.label_4.setGeometry(QtCore.QRect(550, 150, 171, 71))
         self.label_4.setObjectName("label_4")
-        self.textBrowser = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser.setGeometry(QtCore.QRect(10, 210, 211, 251))
-        self.textBrowser.setObjectName("textBrowser")
-        self.textBrowser_2 = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser_2.setGeometry(QtCore.QRect(280, 210, 211, 251))
-        self.textBrowser_2.setObjectName("textBrowser_2")
-        self.textBrowser_3 = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser_3.setGeometry(QtCore.QRect(550, 220, 211, 251))
-        self.textBrowser_3.setObjectName("textBrowser_3")
+
+        self.bb = "It is an easy and safe way to predict your childs gene combinations"
+        self.brightborn = QtWidgets.QTextBrowser(Dialog)
+        self.brightborn.setGeometry(QtCore.QRect(10, 210, 211, 251))
+        self.brightborn.setObjectName("textBrowser")
+        self.brightborn.setFontPointSize(12)
+        self.brightborn.setText(self.bb)
+
+        self.use = "Just upload your DNA code, we will handle the rest :)"
+        self.howToUse = QtWidgets.QTextBrowser(Dialog)
+        self.howToUse.setGeometry(QtCore.QRect(280, 210, 211, 251))
+        self.howToUse.setObjectName("textBrowser_2")
+        self.howToUse.setFontPointSize(12)
+        self.howToUse.setText(self.use)
+
+        self.calculation ="We are taking couples DNA, simulating crossing over as mother nature does and combining them with the high accuracy calculations to give the best result for your future..."
+        self.howCalculationWorks = QtWidgets.QTextBrowser(Dialog)
+        self.howCalculationWorks.setGeometry(QtCore.QRect(550, 220, 211, 251))
+        self.howCalculationWorks.setObjectName("textBrowser_3")
+        self.howCalculationWorks.setFontPointSize(12)
+        self.howCalculationWorks.setText(self.calculation)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

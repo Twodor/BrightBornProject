@@ -148,7 +148,7 @@ patientOCA = open("OCA2.txt").read().replace(" ", "").translate(remove_digits).r
 patientTP53 = open("TP53.txt").read().replace(" ", "").translate(remove_digits).replace("\n", "")
 patientPAH = open("PAH.txt").read().replace(" ", "").translate(remove_digits).replace("\n", "")
 '''
-
+'''
 def checkMutantGensIfGenIsUnhealthy(patientID):
     selectionQuery = "Select * FROM patients where TC_ID = %s"
     cursor.execute(selectionQuery, (patientID,))
@@ -377,16 +377,19 @@ def take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(patient
     checkMutantGensIfGenIsUnhealthy(patientID)
 
 #take_Patient_Set_PatientGen_And_Compare_Gens_Then_Set_Healthy_Status(1)
+'''
 
 
-
-
+def xstr(s):
+    if s is None:
+        return " "
+    return str(s)
 
 
 q = "Select * FROM patients where TC_ID = %s"
 q2 = "Select * FROM patients where TC_ID = %s"
-qv = 9999
-q2v = 8888
+qv = 1234
+q2v = 1232
 
 cursor.execute(q, (qv,))
 res1 = cursor.fetchall()
@@ -394,11 +397,6 @@ res1 = cursor.fetchall()
 
 cursor.execute(q2, (q2v,))
 res2 = cursor.fetchall()
-
-def xstr(s):
-    if s is None:
-        return " "
-    return str(s)
 
 for row in res1:
     hbbM = row[7]
@@ -470,88 +468,30 @@ for row in results:
     httWOMAN = row[5]
     tp53WOMAN = row[6]
     TC_IDWoman = row[14]
-versions = False
 
-cocukhbb2DieaseVersion1 = "No"
-cocukoca2DieaseVersion1 = "No"
-cocukcftr2DieaseVersion1 = "No"
-cocukpah2DieaseVersion1 = "No"
-cocukhtt2DieaseVersion1 = "No"
-cocuktp532DieaseVersion1 = "No"
-#hbb
-if(hbbW == "Not Healthy" and hbbM == "Not Healthy"):
-    cocukhbb = "Not Healthy"
-    if (hbbDiseaseMAN == hbbDiseaseWOMAN):
-        cocukhbb2Disease = hbbDiseaseWOMAN
-    else:
-        cocukhbb2DieaseVersion1 = hbbDiseaseWOMAN + "" + hbbDiseaseMAN
-        versions = True
-else:
-    cocukhbb = "Healthy"
+linkeagedGenNumber = 3
+tempPaternalList = ["AM", "BW", "CM"]
+tempMaternalList = ["AW", "BM", "CM"]
+exListOffSpring=[]
 
 
-#oca2
-if(oca2M == "healthy" and oca2W == "healthy"):
-    cocukoca2 = "Healthy"
-else:
-    cocukoca2 = "Not Healthy"
-    if(oca2DiseaseWOMAN == ocaDisease2MAN):
-        cocukoca2Disease = ocaDisease2MAN
-    else:
-        cocukoca2DieaseVersion1 = oca2DiseaseWOMAN+ "" +ocaDisease2MAN
-        versions = True
+def combine(paternal, maternal, current):
+    tempList = []
+    if (isinstance(current, str)):
+        tempList = [current + paternal, current + maternal]
+    elif (isinstance(current, type([]))):
+        length = len(current)
 
-#cftr
-if(cftrM == "healthy" and cftrW =="healthy" ):
-    cocukcftr = "Healthy"
-else:
-    cocukcftr = "Not Healthy"
-    if (cftrDiseaseMAN == cftrDiseaseWOMAN):
-        cocukcftr2Disease = cftrDiseaseMAN
-    else:
-        cocukcftr2DieaseVersion1 = cftrDiseaseWOMAN + ""+ cftrDiseaseMAN
-        versions = True
-#pah
-if(pahW == "healthy" and pahM =="healthy" ):
-    cocukpah = "Healthy"
-else:
-    cocukpah = "Not Healthy"
-    if (pahDiseaseMAN == pahDiseaseWOMAN):
-        cocukpah2Disease = pahDiseaseMAN
-    else:
-        cocukpah2DieaseVersion1 = pahDiseaseWOMAN + "" + pahDiseaseMAN
-        versions = True
-#htt
-if(httW == "healthy" and httM =="healthy" ):
-    cocukhtt = "Healthy"
-else:
-    cocukhtt = "Not Healthy"
-    if (httDiseaseMAN == httDiseaseWOMAN):
-        cocukhtt2Disease = httDiseaseMAN
-    else:
-        cocukhtt2DieaseVersion1 = httDiseaseWOMAN +"" + httDiseaseMAN
-        versions = True
-#tp53
-if(tp53W == "healthy" and tp53M =="healthy"):
-    cocuktp53 = "Healthy"
-else:
-    cocuktp53 = "Not Healthy"
-    if (tp53DiseaseMAN == tp53DiseaseWOMAN):
-        cocuktp532Disease = tp53DiseaseWOMAN
-    else:
-        cocuktp532DieaseVersion1 = tp53DiseaseMAN +"" + tp53DiseaseWOMAN
-        versions = True
-TC_IDWoman = str(TC_IDWoman)
-TC_IDMan = str(TC_IDMan)
-TC_IDCocuk = TC_IDMan ++ TC_IDWoman
-if(versions == True):
-    childQ = """Insert Into patients(hbb, cftr, oca2, pah, htt, tp53,
-     reshbb, rescftr, resoca2, respah, reshtt, resp53,
-      TC_ID, hbbDiseases, pahDiseases, cftrDiseases, oca2Diseases, httDiseases, tp53Diseases)
-     Values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        for i in range(0, length):
+            tempList.append(current[i] + paternal)
+            tempList.append(current[i] + maternal)
+    return tempList
 
-    values = (hbbWOMAN, cftrWOMAN, oca2WOMAN, pahWOMAN, httWOMAN, tp53WOMAN,
-              cocukhbb, cocukcftr, cocukoca2, cocukpah, cocukhtt, cocuktp53,TC_IDCocuk,
-              cocukhbb2DieaseVersion1 , cocukpah2DieaseVersion1, cocukcftr2DieaseVersion1, cocukoca2DieaseVersion1, cocukhtt2DieaseVersion1,  cocuktp532DieaseVersion1)
-    cursor.execute(childQ, values)
-    connection.commit()
+
+
+exListOffSpring=combine(tempPaternalList[0], tempMaternalList[0], "")
+for i in range(1, linkeagedGenNumber):
+    exListOffSpring=combine(tempPaternalList[i], tempMaternalList[i], exListOffSpring)
+
+
+print(exListOffSpring)

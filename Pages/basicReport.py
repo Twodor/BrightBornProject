@@ -34,21 +34,29 @@ class Ui_Dialog(object):
             self.resp53 = "P53 status: " + row[12] + "\n"
 
 
-            self.hbbDiseases = "HBB Diseases: " + row[17] + "\n"
-            self.pahDiseases = "Pah Diseases: " + row[18] + "\n"
-            self.cftrDiseases = "CFTR Diseases: " + row[19] + "\n"
-            self.oca2Diseases = "OCA2 Diseases: " + row[20] + "\n"
-            self.httDiseases = "HTT Diseases: " + row[21] + "\n"
-            self.tp53Diseases = "TP53 Diseases: " + row[22] + "\n"
+            self.hbbReason = "HBB Reason: " + row[17] + "\n"
+            self.pahReason = "Pah Reason: " + row[18] + "\n"
+            self.cftrReason = "CFTR Reason: " + row[19] + "\n"
+            self.oca2Reason = "OCA2 Reason: " + row[20] + "\n"
+            self.httReason = "HTT Reason: " + row[21] + "\n"
+            self.tp53Reason = "TP53 Reason: " + row[22] + "\n"
+
+            '''
+            self.hbbDiseases = "HBB Diseases: " +row[17] + "\n"
+            self.pahDiseases = "PAH Diseases: " +row[18] + "\n"
+            self.cftrDiseases = "CFTR Diseases: " +row[19] + "\n"
+            self.oca2Diseases = "OCA2 Diseases: " +row[20] + "\n"
+            self.httDiseases = "HTT Diseases: " +row[21] + "\n"
+            self.tp53Diseases  = "TP53 Diseases: " +row[22] + "\n"
+            '''
 
             self.name = "Full Name: " + row[13] + "\n"
 
 
 
         self.values = self.reshbb + self.rescftr + self.resoca2 + self.respah + self.reshtt + self.resp53
-
-        self.diseases = self.hbbDiseases + self.pahDiseases + self.cftrDiseases + self.oca2Diseases + self.httDiseases + self.tp53Diseases
-
+        self.reasons = self.hbbReason + self.pahReason + self.cftrReason + self.oca2Reason + self.httReason + self.tp53Reason
+        #self.disaeses = self.hbbDiseases + self.pahDiseases + self.cftrDiseases + self.oca2Diseases + self.httDiseases + self.tp53Diseases
         self.information = self.name
 
     def complexReport(self):
@@ -66,23 +74,28 @@ class Ui_Dialog(object):
         self.showHealthStatus = QtWidgets.QTextBrowser(Dialog)
         self.showHealthStatus.setGeometry(QtCore.QRect(40, 110, 211, 151))
         self.showHealthStatus.setObjectName("textBrowser_2")
+        self.showHealthStatus.setFontPointSize(10)
         self.showHealthStatus.setText(self.values)
 
 
-        self.ShowDiseasesNames = QtWidgets.QTextBrowser(Dialog)
-        self.ShowDiseasesNames.setGeometry(QtCore.QRect(310, 110, 211, 151))
-        self.ShowDiseasesNames.setObjectName("textBrowser_3")
-        self.ShowDiseasesNames.setText(self.diseases)
+        self.ShowReasonNames = QtWidgets.QTextBrowser(Dialog)
+        self.ShowReasonNames.setGeometry(QtCore.QRect(310, 110, 211, 151))
+        self.ShowReasonNames.setObjectName("textBrowser_3")
+        self.ShowReasonNames.setFontPointSize(10)
+        self.ShowReasonNames.setText(self.reasons)
 
 
         self.generalInformation = QtWidgets.QTextBrowser(Dialog)
         self.generalInformation.setGeometry(QtCore.QRect(40, 290, 211, 151))
         self.generalInformation.setObjectName("textBrowser_4")
+        self.generalInformation.setFontPointSize(10)
         self.generalInformation.setText(self.information)
 
-        self.textBrowser_5 = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser_5.setGeometry(QtCore.QRect(310, 290, 211, 151))
-        self.textBrowser_5.setObjectName("textBrowser_5")
+        self.showDieaseNames = QtWidgets.QTextBrowser(Dialog)
+        self.showDieaseNames.setGeometry(QtCore.QRect(310, 290, 211, 151))
+        self.showDieaseNames.setObjectName("textBrowser_5")
+        #self.showDieaseNames.setText(self.disaeses)
+
         self.commandLinkButton = QtWidgets.QCommandLinkButton(Dialog)
         self.commandLinkButton.setGeometry(QtCore.QRect(500, 450, 201, 41))
         self.commandLinkButton.setObjectName("commandLinkButton")
